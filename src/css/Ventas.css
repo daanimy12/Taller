@@ -1,0 +1,604 @@
+.table_sell {
+    height: 50%;
+}
+
+.table_leftover_sell {
+    background-color: #BBBBBB;
+    height: 50%;
+    width: 100%;
+    visibility: visible;
+}
+
+.start {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    /*background: #EBB679;*/
+}
+
+.end {
+    height: 100%;
+    background: transparent;
+    /*background: #217E80;*/
+}
+
+.price {
+    font-size: 54px;
+}
+
+.products_size {
+    height: 50px;
+    width: 50px;
+}
+
+.mesaname {
+    font-size: 16px;
+}
+
+@media screen and (orientation: landscape) {
+    .table_sell {
+        height: 50%;
+    }
+
+    .price {
+        font-size: 24px;
+    }
+
+    .products_size {
+        height: 30px;
+        width: 30px;
+    }
+
+    @media screen and (max-width: 768px) {
+
+        .view_small {
+            background-image: url("./icons/marmol.jpg");
+            background-attachment: fixed;
+        }
+
+        .mesaname {
+            font-size: 24px;
+        }
+
+        .price {
+            font-size: 22px;
+        }
+
+        .products_size {
+            height: 30px;
+            width: 30px;
+        }
+    }
+
+    @media screen and (max-width: 992px) {
+
+        .view_small {
+            background-image: url("./icons/marmol.jpg");
+            background-attachment: fixed;
+        }
+
+        .price {
+            font-size: 22px;
+        }
+
+        .mesaname {
+            font-size: 24px;
+        }
+
+        .products_size {
+            height: 30px;
+            width: 30px;
+        }
+    }
+
+    @media screen and (max-width: 1200px) {
+
+        .view_small {
+            background-image: url("./icons/marmol.jpg");
+            background-attachment: fixed;
+        }
+
+        .price {
+            font-size: 24px;
+        }
+
+        .mesaname {
+            font-size: 26px;
+        }
+
+        .products_size {
+            height: 30px;
+            width: 30px;
+        }
+    }
+
+    @media screen and (min-width: 1200px) {
+
+        .view_small {
+            background-image: url("./icons/marmol.jpg");
+            background-attachment: fixed;
+        }
+
+        .price {
+            font-size: 34px;
+        }
+
+        .mesaname {
+            font-size: 36px;
+        }
+
+        .products_size {
+            height: 50px;
+            width: 50px;
+        }
+    }
+
+}
+
+@media screen and (orientation: portrait) {
+    @media screen and (max-width: 992px) {
+        .table_sell {
+            max-height: 30%;
+        }
+
+        .table_leftover_sell {
+            height: 0%;
+            width: 0%;
+            visibility: hidden;
+        }
+
+        .view_small {
+            background-image: url("./icons/marmol.jpg");
+            background-attachment: fixed;
+        }
+
+        .price {
+            font-size: 32px;
+        }
+
+        .products_size {
+            height: 30px;
+            width: 30px;
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        .table_sell {
+            max-height: 30%;
+        }
+
+        .table_leftover_sell {
+            height: 0%;
+            width: 0%;
+            visibility: hidden;
+        }
+
+        .mesaname {
+            font-size: 30px;
+        }
+
+        .view_small {
+            background-image: url("./icons/marmol.jpg");
+            background-attachment: fixed;
+        }
+
+        .price {
+            font-size: 28px;
+        }
+
+        .products_size {
+            height: 35px;
+            width: 35px;
+        }
+    }
+}
+
+.fondo {
+    background-image: url("./icons/marmol.jpg");
+    background-attachment: fixed;
+}
+
+#row2 {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+}
+
+#row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+}
+
+.justify_conten {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.justify_conten_box_inp {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.box_out {
+    width: 80%;
+    height: 80%;
+    /*background: #E84E4E;*/
+    background-image: url("http://3.bp.blogspot.com/-C3u0YMfP9Lc/UXbF5z-XbjI/AAAAAAAAAGY/jX3I8_CUvZA/s320/Wood_floor_texture_sketchup_warehouse_type085.jpg");
+    border-radius: 15px;
+    position: absolute;
+    box-shadow: -1px 18px 23px -20px rgba(97, 97, 97, 1);
+}
+
+.box_inp {
+    width: 80%;
+    height: 80%;
+    background: #E84E4E;
+    border-radius: 15px;
+}
+
+.space {
+    display: grid;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+}
+
+.clic:active {
+    transition: 200ms;
+    opacity: .5;
+}
+
+.clic {
+    transition: 200ms;
+    opacity: 1;
+}
+
+.search {
+    color: #000000;
+    transition: 200ms;
+}
+
+.search:focus {
+    transition: 200ms;
+    border: #217E80 solid 1px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-top-width: 0px;
+}
+
+.item {
+    height: 250px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.item_img {
+    height: 250px;
+    width: 100%;
+    resize: both;
+}
+
+.item_img_back {
+    height: 160px;
+    width: 100%;
+    resize: both;
+}
+
+.modal_height {
+    /*overflow: scroll;*/
+    /*height: 50%;*/
+}
+
+.name_product {
+    text-align: center;
+    color: red;
+}
+
+.price_product {
+    text-align: center;
+    color: #000000;
+}
+
+.item_border_fail {
+    border-radius: 10px;
+    -webkit-box-shadow: -2px 9px 34px -19px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: -2px 9px 34px -19px rgba(0, 0, 0, 0.75);
+    box-shadow: -2px 9px 34px -19px rgba(0, 0, 0, 0.75);
+    margin-bottom: 20px;
+    margin-top: 15px;
+}
+
+.fail_image {
+    height: 200px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.item_inp {
+    border-radius: 10px;
+    -webkit-box-shadow: -2px 9px 34px -19px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: -2px 9px 34px -19px rgba(0, 0, 0, 0.75);
+    box-shadow: -2px 9px 34px -19px rgba(0, 0, 0, 0.75);
+    margin-bottom: 15px;
+    margin-top: 15px;
+    height: 94.95%;
+}
+
+.item_back {
+    height: 170px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    padding-bottom: 10px;
+}
+
+.selector_cuenta {
+    /*width: 28%;*/
+    height: 150px;
+}
+
+/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+.item_border {
+    border-radius: 10px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    height: 94.95%;
+    background-color: transparent;
+    perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 390px;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.item_border:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Position the front and back side */
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 390px;
+    backface-visibility: hidden;
+}
+
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
+    border-radius: 10px;
+    background-color: #FFF;
+    color: black;
+}
+
+/* Style the back side */
+.flip-card-back {
+    border-radius: 10px;
+    background-color: #FFF;
+    color: black;
+    transform: rotateY(180deg);
+}
+
+.pay_modal_box {
+    /*width: 100%;*/
+    /*padding: 20px;*/
+}
+
+.detail_pay_modal {
+    /*width: 100%;*/
+    /*height: 290px;*/
+    /*overflow: scroll;*/
+}
+
+.item_pay {
+    height: 100px;
+    width: 100%;
+    border: #CCCCCC solid 1px;
+    flex-direction: row;
+    -webkit-flex-direction: row;
+    display: flex;
+    display: flex;
+    border-right-width: 00px;
+    border-top-width: 00px;
+    border-left-width: 00px;
+}
+
+.box_img_pay {
+    height: 100px;
+    width: 100px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.detail_product_pay {
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+}
+
+.name_product_pay {
+    width: 100%;
+}
+
+.image_pay {
+    height: 80px;
+    width: 80px;
+    border-radius: 5px;
+}
+
+.pay_product {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+.amount_pay {
+    padding-top: 5px;
+    border: #CCCCCC solid 1px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-bottom-width: 0px;
+    flex-direction: row;
+    /*display: flex;*/
+}
+
+.header_cash {
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    /*height: 125px;*/
+    border: #CCCCCC solid 1px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-bottom-width: 0px;
+}
+
+.pay_word_soze {
+    font-size: 25px;
+    text-align: center;
+    color: #000000;
+}
+
+.body_cash {
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    /*height: 145px;*/
+    border: #CCCCCC solid 1px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-bottom-width: 0px;
+}
+
+.footer_cash {
+    /*height: 100px;*/
+    border: #CCCCCC solid 1px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-bottom-width: 0px;
+}
+
+@-webkit-keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
+}
+
+@keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes expand {
+    from {
+        min-width: 50px
+    }
+    to {
+        min-width: 190px
+    }
+}
+
+@keyframes expand {
+    from {
+        min-width: 50px
+    }
+    to {
+        min-width: 190px
+    }
+}
+
+@-webkit-keyframes stay {
+    from {
+        min-width: 190px
+    }
+    to {
+        min-width: 190px
+    }
+}
+
+@keyframes stay {
+    from {
+        min-width: 190px
+    }
+    to {
+        min-width: 190px
+    }
+}
+
+@-webkit-keyframes shrink {
+    from {
+        min-width: 190px;
+    }
+    to {
+        min-width: 50px;
+    }
+}
+
+@keyframes shrink {
+    from {
+        min-width: 190px;
+    }
+    to {
+        min-width: 50px;
+    }
+}
+
+@-webkit-keyframes fadeout {
+    from {
+        bottom: 30px;
+        opacity: 1;
+    }
+    to {
+        bottom: 60px;
+        opacity: 0;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        bottom: 30px;
+        opacity: 1;
+    }
+    to {
+        bottom: 60px;
+        opacity: 0;
+    }
+}
+
+.letter_word{
+    /*font-size: 10pt;*/
+    /*font-size: 12px;*/
+}
+
+.box_selector{
+    width: 100%;
+    /*overflow: scroll;*/
+}

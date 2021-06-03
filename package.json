@@ -1,0 +1,49 @@
+{
+  "name": "ciber",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "^5.0.1",
+    "chart.js": "^3.3.2",
+    "crypto-js": "^4.0.0",
+    "firebase": "^8.6.3",
+    "qrcode.react": "^1.0.1",
+    "quagga": "^0.12.1",
+    "react": "^17.0.2",
+    "react-barcode": "^1.4.0",
+    "react-chartjs-2": "^3.0.3",
+    "react-dom": "^17.0.2",
+    "react-excel-workbook": "0.0.4",
+    "react-icomoon": "^2.3.5",
+    "react-qr-reader": "^2.2.1",
+    "react-router-dom": "^5.2.0",
+    "react-s-alert": "^1.4.1",
+    "react-scripts": "4.0.3",
+    "react-select": "^4.3.1",
+    "react-to-print": "^2.12.6",
+    "reactstrap": "^8.9.0",
+    "recharts": "^2.0.9",
+    "rumble-charts": "^3.1.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

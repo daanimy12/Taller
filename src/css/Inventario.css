@@ -1,0 +1,16 @@
+#menuInventario{
+    color: #ffffff;
+    width: 100%;
+    background-color: #000000;
+    text-align: center;
+}
+#MenuMas{
+    margin-right: 0px;
+    margin-left: 0px;
+}
+.PrincipalTaU{
+    max-height: 50%;
+}
+#CajaUnica1{
+    background-color: red;
+}
