@@ -1,0 +1,50 @@
+.CajaFiltro{
+    width: 100%;
+    height: 30%;
+   /* background-color: red;*/
+}
+.Reportes1{
+    width: 100%;
+    height: 100%;
+}
+
+.CajaTabla{
+    width: 100%;
+    height: 60%;
+    /*background-color: #9C27B0;*/
+}
+.Filtros{
+    height: 100%;
+    /*background-color: #61dafb;*/
+}
+.CjaFCentrar{
+    /*  background-color: #673AB7;*/
+    margin: 2%;
+    border: 3px #000000 solid;
+    padding: 2rem;
+}
+#Buton{
+    margin: 0%;
+    padding: 0%;
+}
+#Buton2{
+    margin: 0%;
+    padding: 0%;
+    border: 1px solid #000;
+}
+#labelE{
+    text-align: start;
+}
+#labelT{
+    font-weight: none;
+}
+
+#CajaDivicional{
+    max-height: 50%;
+}
+#Union{
+    height: 100%;
+}
+.TamanT{
+    max-height: 40rem;
+}

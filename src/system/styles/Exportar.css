@@ -1,0 +1,69 @@
+.PrincipalCon{
+    height: 100%;
+    /* background-color: cadetblue; */
+}
+.table-primary{
+    cursor: none;
+}
+/* Menu 2.9 */
+.ConMenu{
+    margin-left: auto;
+    margin-right: auto;
+}
+#Fondo{
+    /* background-color: rgba(0,0,0,.7); */
+    background-color: rgba(0,0,0);
+    position: fixed;
+    height: 100%;
+}
+
+/*Contenido*/
+.Contenido{
+    background-color: red;
+    width: 100%;
+}
+.Tamano{
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    display: flex;
+    font-size: calc(10px + 2vmin);
+    margin: 0%;
+}
+p{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* Valor de menu */
+@media screen and (max-width:767px ) {
+
+
+    #Fondo{
+        background-color: rgba(0,0,0,.7);
+        position: absolute;
+        height: 15%;
+        width: 100%;
+        padding: 0%;
+    }
+    .Tabla{
+        margin:0%
+    }
+}
+
+/* Botton de exportar */
+.ButtonExport{
+    margin-top: 2%
+}
