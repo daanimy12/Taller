@@ -1,4 +1,4 @@
-import  modelo from '../../system/modal';
+import  modelo from '../../system/model';
 
 class Universal {
     static ConsultaUniversalSinKey=(ref)=>{

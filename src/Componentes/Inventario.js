@@ -22,14 +22,14 @@ class Inventario extends Component {
             <div>
                 <MenuInventario/>
                 <Switch>
-                    <Route path='/Principal/Inventario/AgregarProduc' component={AgregarProducto}/>
-                    <Route path='/Principal/Inventario/Extras' component={Union}/>
-                    <Route path='/Principal/Codigos' component={Codigo}/>
+                    <Route path='/Customers/Inventario/AgregarProduc' component={AgregarProducto}/>
+                    <Route path='/Customers/Inventario/Extras' component={Union}/>
+                    <Route path='/Customers/Codigos' component={Codigo}/>
                     <Route component={Error} />
                 </Switch>
             </div>   :
             <Switch>
-                <Route path='/Principal/Inventario/AgregarProduc' component={AgregarProducto}/>
+                <Route path='/Customers/Inventario/AgregarProduc' component={AgregarProducto}/>
                 <Route component={Error} />
             </Switch>;
         return (

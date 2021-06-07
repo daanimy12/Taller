@@ -1,11 +1,11 @@
-import React, {Component,useState } from 'react';
+import React, {Component } from 'react';
 import '../../../system/styles/Reportes.css';
-import Reportes from "../index";
+import Reportes from "../../../Componentes/customers/tableCustomers";
 import Preload from "../../../Componentes/Preload";
 import Workbook from 'react-excel-workbook'
 import Tabla from "../Tabla";
 import TablaDinamica from "../../TablaDinamica";
-import {firebaseDatabase} from "../../../Conexion/fire";
+import {firebaseDatabase} from "../../../system/model/firebase/firebase";
 import { Bar } from 'react-chartjs-2';
 import Universal from "../../Universal";
 import Alert from "react-s-alert";

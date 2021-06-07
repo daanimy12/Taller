@@ -1,4 +1,4 @@
-import {firebaseDatabase,firebaseStorage} from "../../Conexion/fire";
+import {firebaseDatabase,firebaseStorage} from "./firebase/firebase";
 
 class modelo {
     static ConsultaUniversal=(ref)=>{

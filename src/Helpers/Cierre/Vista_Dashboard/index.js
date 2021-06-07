@@ -80,7 +80,7 @@ class index extends Component {
     go_to_ventas = () => {
         // history.replace('Cierre_de_Caja/Dashboard')
         history.goBack()
-        history.// history.push('Principal/Venta_Directa');
+        history.// history.push('Index/Venta_Directa');
         window.location.reload();
     }
 
@@ -99,7 +99,7 @@ class index extends Component {
                                 realice una venta al menos para poder generar un cierre de caja</h5>
                         </div>
                         <div className="box_buttom">
-                            <button className="btn btn-danger btn_color_opss"><a href={'/Principal/Venta_Directa'}><h5
+                            <button className="btn btn-danger btn_color_opss"><a href={'/Customers/Venta_Directa'}><h5
                                 className="text_buttom">Ir a
                                 Ventas</h5></a></button>
                         </div>

@@ -9,7 +9,7 @@ class MenuInventario extends Component {
     }
 
     Cambio = (e) => {
-        history.push('/Principal/Inventario/'+[e.target.id]);
+        history.push('/Customers/Inventario/'+[e.target.id]);
         window.location.reload();
     };
 
