@@ -1,4 +1,4 @@
-import {firebaseDatabase} from '../../Conexion/fire'
+import {firebaseDatabase} from '../../system/model/firebase/firebase'
 import Helper from './Fecha'
 import Helper_Usuario from '../Login'
 

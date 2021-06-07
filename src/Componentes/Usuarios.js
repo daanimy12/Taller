@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {firebaseDatabase} from '../Conexion/fire';
+import {firebaseDatabase} from '../system/model/firebase/firebase';
 import CryptoJS from 'crypto-js';
 import Alert from 'react-s-alert';
 import '../system/styles/Usuario.css';

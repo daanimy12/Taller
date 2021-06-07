@@ -1,26 +1,57 @@
 import React from 'react';
 import styled from "styled-components";
-import {firebaseDatabase} from '../../Conexion/fire';
-import { useHistory }  from "react-router-dom";
+import {firebaseDatabase} from '../../system/model/firebase/firebase';
 import Alert from 'react-s-alert';
 import { colorPalette } from  "../../system/styles/styles"
-import HelpersLogin from '../../Helpers/Login';
+import HelperLogin from '../../Helpers/Login';
+import {NotificationManager} from "react-notifications";
 
 const Loggin = (props) => {
     const formRef = React.useRef();
     const { className } = props;
-    const history =  useHistory();
     const [state,setState] = React.useState({
         email: '',
-        password: ''
+        password: '',
+        title: ""
     });
 
-    const HelpLogin = new HelpersLogin();
+    const HelpersLogin =  HelperLogin();
 
-    const componentWillMount = ()=> {
-        document.title = `Loggin`;
-        const datos = HelpersLogin.Desencriptar();
-        if (datos !== false) this.revisador(datos);
+
+    React.useEffect(
+        () => {
+            document.title = `Loggin`;
+            const datos = HelpersLogin.Desencriptar();
+            console.log(datos)
+            if (datos !== false) revisador(datos);
+        }, []);
+
+
+    const validar = async () => {
+        try {
+            const {email, password} = {...state}
+            console.log(state)
+            const snapshot = await firebaseDatabase.ref('Usuarios').orderByChild('Usuario').equalTo(email).once('value');
+            const validarPassWord = await HelpersLogin.Validar(snapshot, password);
+            console.log(validarPassWord);
+            if (validarPassWord === false) error();
+            if (validarPassWord.boolean === true) success(validarPassWord);
+        } catch (e) {
+            error_inesperado();
+        }
+
+
+        //     .then(function (snapshot) {
+        //     return snapshot;
+        // }).then(e => {
+        //     console.log(e)
+        //     return HelpersLogin.Validar(e, password);
+        // }).then(i => {
+        //     if (i === false) error();
+        //     if (i.boolean === true) success(i);
+        // }).catch(e => {
+        //     error_inesperado();
+        // })
     }
 
     const revisador = (data = '') => {
@@ -48,47 +79,29 @@ const Loggin = (props) => {
         }
     }
 
-    const validar= () => {
-        const {email, password} = {...this.state}
-        firebaseDatabase.ref('Usuarios').orderByChild('Usuario').equalTo(email).once('value').then(function (snapshot) {
-            return snapshot;
-        }).then(e => {
-            console.log(e)
-            return HelpersLogin.Validar(e, password);
-        }).then(i => {
-            if (i === false) error();
-            if (i.boolean === true) success(i);
-        }).catch(e => {
-            error_inesperado();
-        })
-    }
+
 
     const success = (i = []) => {
         HelpersLogin.Encriptar(i);
         if(i.Tipo === 'Vendedor'){
-            HelpersLogin.CambioURL('/Principal/Venta')
+            HelpersLogin.CambioURL('/Customers/Venta')
         }else{
-            HelpersLogin.CambioURL('/Principal/Clientes')
+            HelpersLogin.CambioURL('/Customers/Clientes')
         }
     }
 
     const success_observador = (date='') => {
        // console.log(date)
         if(date === 'Vendedor'){
-            HelpersLogin.CambioURL('/Principal/Venta')
+            HelpersLogin.CambioURL('/Customers/Venta')
         }else{
-            HelpersLogin.CambioURL('/Principal/Clientes')
+            HelpersLogin.CambioURL('/Customers/Clientes')
         }
     }
 
     const error_inesperado = () => {
-        this.setState({title: 'Error Inesperado'}, () => {
-            Alert.error(this.state.title, {
-                position: 'top',
-                effect: 'slide',
-                timeout: 1000
-            })
-        })
+        setState(prev => ({...prev,title: 'Error Inesperado'}));
+        NotificationManager.error('Error Inesperado',"",3000);
     }
 
     const error_observador = () => {
@@ -96,26 +109,27 @@ const Loggin = (props) => {
     }
 
     const error = () => {
-        this.setState({title: 'Usuario o contraseña erroneas'}, () => {
-            Alert.error(this.state.title, {
+        setState(prev=> ({title: 'Usuario o contraseña erroneas'}, () => {
+            Alert.error(state.title, {
                 position: 'top',
                 effect: 'slide',
                 timeout: 1000
             })
-        })
+        }))
     }
 
 
         return (
             <div className={className}>
-                <form id="form" ref={formRef}>
+                <form id="form" ref={formRef} >
                     <img src="https://i.pinimg.com/originals/97/95/eb/9795ebef9b85576509c37dfce0c8aed8.jpg" alt="logo"/>
                     <label id="label" htmlFor="email">Usuario:</label>
-                    <input type="email" id="email" onChange={updatestate}/>
+                    <input type="email" id="email" onChange={updatestate} value={state.email}/>
                     <label id="label" htmlFor="password">Password:</label>
                     <input type="password" id="password" onKeyPress={onKeyPress}
+                           value={state.password}
                            onChange={updatestate}/>
-                    <button type="submit"> Aceptar </button>
+                    <button type="button" onClick={validar}> Aceptar </button>
                 </form>
             </div>
         );
@@ -130,8 +144,8 @@ export default styled(Loggin)`
   align-items: center;
   background-color: rgba(0,0,0,.16);
   form {
-    width: 50%;
-    height: 50%;
+    height: 453px;
+    width: 860px;
     background-color: ${colorPalette.white};
     border-radius: 10px;
     display: flex;

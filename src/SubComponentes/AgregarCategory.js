@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Alert from "react-s-alert";
 import Inventario from '../Helpers/Inventario';
 import TablaDinamica from '../Helpers/TablaDinamica';
-import {firebaseDatabase} from "../Conexion/fire";
+import {firebaseDatabase} from "../system/model/firebase/firebase";
 import Preload from '../Componentes/Preload';
 class AgregarCategory extends Component {
     NoValidad = ['Key'];

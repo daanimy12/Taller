@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import HelpersVenta from '../Helpers/Venta';
-import {firebaseDatabase} from "../Conexion/fire";
+import {firebaseDatabase} from "../system/model/firebase/firebase";
 import Preload from './Preload'
 import Collect from '../Helpers/Venta_Directa/Collect';
 import '../system/styles/Venta_Directa.css';

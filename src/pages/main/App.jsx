@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Loggin from '../loggin/Loggin';
-import Principal from '../../Componentes/Principal';
+import Customers from './containerTwo';
 import Error from "../../Componentes/Error";
-
+import { NotificationContainer } from 'react-notifications';
 function App() {
   return (
       <div className="App">
@@ -11,12 +11,11 @@ function App() {
           <BrowserRouter>
             <Switch>
                 <Route path='/' component={Loggin} exact />
-                <Route path='/Principal' component={Principal}  />
-
+                <Route path='/Customers' component={Customers}  />
                 <Route component={Error} />
             </Switch>
           </BrowserRouter>
-
+          <NotificationContainer/>
         </div>
       </div>
   );
