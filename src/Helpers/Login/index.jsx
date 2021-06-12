@@ -1,14 +1,13 @@
-import { useHistory } from "react-router-dom";
+import { createBrowserHistory as createHistory} from 'history';
+const history = new createHistory();
 let CryptoJS = require("crypto-js");
-const HelpersLogin = () => {
-    const history = useHistory();
-    const CambioURL = (URL) => {
+class HelpersLogin {
+    static CambioURL = (URL) => {
         history.push(URL);
         window.location.reload();
     };
-    const Validar = async (data = [], password = '') => {
+    static Validar(data = [], password = '') {
         let data2 = [];
-        // console.log(data)
         data.forEach(e => {
             data2 = {...(e.val())};
         })
@@ -19,17 +18,16 @@ const HelpersLogin = () => {
         return false;
     }
 
-    const Encriptar = (data = []) => {
+    static Encriptar(data = []) {
         const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(data), 'Pedro1');
         window.sessionStorage.setItem('Usuario', ciphertext);
     }
 
-    const EncriptarG = (data = []) => {
+    static EncriptarG(data = []) {
         const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(data), 'Pedro1');
         return ciphertext;
     }
-
-    const Desencriptar = () => {
+    static Desencriptar() {
         const encrypt = window.sessionStorage.getItem('Usuario');
         if (encrypt !== null){
             const bytes  = CryptoJS.AES.decrypt(encrypt, 'Pedro1');
@@ -39,7 +37,7 @@ const HelpersLogin = () => {
             return false;
         }
     }
-    const DesencriptarG = (datos) => {
+    static DesencriptarG(datos) {
         const encrypt = datos;
         if (encrypt !== null){
             const bytes  = CryptoJS.AES.decrypt(encrypt, 'Pedro1');
@@ -50,7 +48,7 @@ const HelpersLogin = () => {
         }
     }
 
-    const Validar_Observador = (data = [], data_storage = []) => {
+    static Validar_Observador(data = [], data_storage = []) {
         let data2 = [];
         data.forEach(e => {
             data2 = {...(e.val())};
@@ -59,21 +57,11 @@ const HelpersLogin = () => {
         return false;
     }
 
-    const Eliminar = () => {
+    static Eliminar() {
         window.sessionStorage.removeItem('Usuario');
         window.localStorage.removeItem('TipoC');
     }
 
-    return {
-        Eliminar,
-        Validar,
-        Validar_Observador,
-        Desencriptar,
-        DesencriptarG,
-        EncriptarG,
-        Encriptar,
-        CambioURL
-    }
 }
 
 export default HelpersLogin;
