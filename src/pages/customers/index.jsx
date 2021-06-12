@@ -35,7 +35,11 @@ const Customers = (props) => {
         phone: '',
         description: '',
         brand: '',
+<<<<<<< HEAD
 
+=======
+        edit: false,
+>>>>>>> 40106371216e0edda3abacd9df8859033e7221e6
 
         // Antiguos datos
         TablaVacia: true,
@@ -56,6 +60,7 @@ const Customers = (props) => {
         setState(prev => ({ ...prev, [name]: value}));
     };
 
+<<<<<<< HEAD
     const loadUpdate = (valor) => {
         textInput.current.focus();
         setState(prev => ( {
@@ -73,6 +78,9 @@ const Customers = (props) => {
         } ));
 
     };
+=======
+
+>>>>>>> 40106371216e0edda3abacd9df8859033e7221e6
 
 
     const tableCustomers = (value) => {
@@ -110,6 +118,7 @@ const Customers = (props) => {
             description: '',
             brand: '',
             TitleButtonDeAc: 'Desactivar',
+<<<<<<< HEAD
         }));
     };
     const deleteFunct =  async () => {
@@ -133,6 +142,11 @@ const Customers = (props) => {
             NotificationManager.error('Seleccione un Cliente');
         }
     };
+=======
+            edit: false
+        }));
+    };
+>>>>>>> 40106371216e0edda3abacd9df8859033e7221e6
 
     React.useEffect(
         async () =>{
@@ -141,6 +155,7 @@ const Customers = (props) => {
         }, []
     );
 
+<<<<<<< HEAD
     const onChangeCode = (code) => {
         setState(prev=>({...prev,Codigo: code}));
     }
@@ -193,6 +208,8 @@ const Customers = (props) => {
         });
     }
 
+=======
+>>>>>>> 40106371216e0edda3abacd9df8859033e7221e6
     const validateVarEmpty = (value) => {
         return value !== "";
     }
@@ -204,7 +221,12 @@ const Customers = (props) => {
             phone,
             description,
             modelCar,
+<<<<<<< HEAD
             brand
+=======
+            brand,
+            edit
+>>>>>>> 40106371216e0edda3abacd9df8859033e7221e6
         } = state;
         if (
            validateVarEmpty(name) &&
@@ -223,6 +245,7 @@ const Customers = (props) => {
                 description,
                 modelCar,
                 brand,
+<<<<<<< HEAD
                 createdAt: new Date(),
                 invoice: uuid(),
                 status: 1
@@ -232,6 +255,26 @@ const Customers = (props) => {
             await consulta();
             NotificationManager.success("Cliente agregado");
             await cancel();
+=======
+                status: edit ? state.status : 1
+            };
+
+            if(edit) {
+                await Universal.UpdateUniversal(`Clientes/${state.Key}`,payload);
+                setState(prev=> ({...prev,Conexion: false}));
+                await consulta();
+                NotificationManager.success("Cliente actualizado");
+                await cancel();
+            } else {
+                payload.invoice =uuid();
+                payload.createdAt = new Date();
+                await Universal.PushUniversal("Clientes", payload );
+                setState(prev=> ({...prev,Conexion: false}));
+                await consulta();
+                NotificationManager.success("Cliente agregado");
+                await cancel();
+            }
+>>>>>>> 40106371216e0edda3abacd9df8859033e7221e6
         } else {
             NotificationManager.error("Datos Vacíos")
         }
@@ -239,7 +282,15 @@ const Customers = (props) => {
     }
 
     const onSelectData = async (obj) => {
+<<<<<<< HEAD
         console.log(obj)
+=======
+        setState( prev => ( {
+            ...prev,
+            ...obj,
+            edit: true
+        }))
+>>>>>>> 40106371216e0edda3abacd9df8859033e7221e6
     }
 
     const Tabla = state.TablaVacia ? <Preload/>
@@ -312,7 +363,11 @@ const Customers = (props) => {
                             </div>
 
                             <hr/>
+<<<<<<< HEAD
                             <button type="button" onClick={onSubmitForm}> Aceptar </button>
+=======
+                            <button type="button" onClick={onSubmitForm}> { state.edit ? "Actualizar" : "Aceptar" }  </button>
+>>>>>>> 40106371216e0edda3abacd9df8859033e7221e6
                         </form>
                     </article>
                     <article>

@@ -22,8 +22,13 @@ const TableCustomers = (props) => {
                 <tbody>
                     {
                         values.map(
+<<<<<<< HEAD
                             val => (
                                 <tr onClick={() => funcSelect(val)}>
+=======
+                            (val,idx) => (
+                                <tr key={idx} onClick={() => funcSelect(val)}>
+>>>>>>> 40106371216e0edda3abacd9df8859033e7221e6
                                     <td>{ val.invoice }</td>
                                     <td>{ `${val.name} ${val.lastName}` }</td>
                                     <td>{ val.direction }</td>
