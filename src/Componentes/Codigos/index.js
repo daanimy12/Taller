@@ -50,7 +50,11 @@ class index extends Component {
         prevState.Codigos =  nextProps.location.Codigos;
         if(prevState.Codigos === 'Pedro21' || prevState.Codigos === undefined){
             nextProps.history.push({
+<<<<<<< HEAD
                 pathname: "/Principal/Clientes",
+=======
+                pathname: "/Customers/Clientes",
+>>>>>>> f2cd55581963bcbc124e2ee1622cc5a0fec16fee
             });
         }
         return null;

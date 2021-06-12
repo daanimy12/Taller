@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 import Preload from './Preload'
+<<<<<<< HEAD
 import '../css/Limites.css';
+=======
+import '../system/styles/Limites.css';
+>>>>>>> f2cd55581963bcbc124e2ee1622cc5a0fec16fee
 import Helpers from '../Helpers/Configuracion';
 import Fecha from '../Helpers/Configuracion/Fecha'
 

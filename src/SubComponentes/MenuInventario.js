@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 import { createBrowserHistory as createHistory} from 'history';
+<<<<<<< HEAD
 import '../css/Inventario.css';
+=======
+import '../system/styles/Inventario.css';
+>>>>>>> f2cd55581963bcbc124e2ee1622cc5a0fec16fee
 const history = new createHistory();
 class MenuInventario extends Component {
 
@@ -9,7 +13,11 @@ class MenuInventario extends Component {
     }
 
     Cambio = (e) => {
+<<<<<<< HEAD
         history.push('/Principal/Inventario/'+[e.target.id]);
+=======
+        history.push('/Customers/Inventario/'+[e.target.id]);
+>>>>>>> f2cd55581963bcbc124e2ee1622cc5a0fec16fee
         window.location.reload();
     };
 

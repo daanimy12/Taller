@@ -1,9 +1,16 @@
 import React, {Component} from 'react';
 import HelpersVenta from '../Helpers/Venta';
+<<<<<<< HEAD
 import {firebaseDatabase} from "../Conexion/fire";
 import Preload from './Preload'
 import View_Table from '../Table_View'
 import '../css/Ventas.css'
+=======
+import {firebaseDatabase} from "../system/model/firebase/firebase";
+import Preload from './Preload'
+import View_Table from '../Table_View'
+import '../system/styles/Ventas.css'
+>>>>>>> f2cd55581963bcbc124e2ee1622cc5a0fec16fee
 
 class Venta extends Component {
 

@@ -10,9 +10,13 @@ import ModalUniversal from "../Helpers/ModalUniversal";
 import Login from "../Helpers/Login";
 import Barcode from "react-barcode";
 import QRCode from "qrcode.react";
+<<<<<<< HEAD
 import './css/AgregarPro.css';
 import './css/all.css';
 import {firebaseStorage} from "../Conexion/fire";
+=======
+import {firebaseStorage} from "../system/model/firebase/firebase";
+>>>>>>> f2cd55581963bcbc124e2ee1622cc5a0fec16fee
 
 class AgregarProducto extends Component {
     NoValidar = ['Key', 'Categoria', 'Estatus', 'Ganancia', 'Image', 'Precio_Compra', 'Provedor'];
@@ -449,7 +453,11 @@ class AgregarProducto extends Component {
 
     CBUnico = () => {
         this.props.history.push({
+<<<<<<< HEAD
             pathname: "/Principal/Codigos",
+=======
+            pathname: "/Index/Codigos",
+>>>>>>> f2cd55581963bcbc124e2ee1622cc5a0fec16fee
             Codigos: <><Barcode value={this.state.Input.Codigo}/>
                 <QRCode value={this.state.Input.Codigo}/></>
         });

@@ -35,7 +35,11 @@ class index extends Component {
     detalles = () => {
         const data = this.state;
         history.push({
+<<<<<<< HEAD
             pathname: "/Principal/Cierre_de_Caja/Detalles",
+=======
+            pathname: "/Index/Cierre_de_Caja/Detalles",
+>>>>>>> f2cd55581963bcbc124e2ee1622cc5a0fec16fee
             state: data
         });
         // console.log(data)

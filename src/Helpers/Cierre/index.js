@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import {firebaseDatabase} from '../../Conexion/fire';
+=======
+import {firebaseDatabase} from '../../system/model/firebase/firebase';
+>>>>>>> f2cd55581963bcbc124e2ee1622cc5a0fec16fee
 import Helper from '../Venta/Fecha'
 
 class HelpersVenta {

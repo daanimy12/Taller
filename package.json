@@ -3,6 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+<<<<<<< HEAD
+=======
+    "@styled-icons/boxicons-regular": "^10.34.0",
+    "@styled-icons/boxicons-solid": "^10.34.0",
+    "@styled-icons/fa-solid": "^10.34.0",
+    "@styled-icons/fluentui-system-filled": "^10.34.0",
+    "@styled-icons/foundation": "^10.34.0",
+    "@styled-icons/material-outlined": "^10.34.0",
+    "@styled-icons/remix-line": "^10.18.0",
+>>>>>>> f2cd55581963bcbc124e2ee1622cc5a0fec16fee
     "bootstrap": "^5.0.1",
     "chart.js": "^3.3.2",
     "crypto-js": "^4.0.0",
@@ -15,6 +25,10 @@
     "react-dom": "^17.0.2",
     "react-excel-workbook": "0.0.4",
     "react-icomoon": "^2.3.5",
+<<<<<<< HEAD
+=======
+    "react-notifications": "^1.7.2",
+>>>>>>> f2cd55581963bcbc124e2ee1622cc5a0fec16fee
     "react-qr-reader": "^2.2.1",
     "react-router-dom": "^5.2.0",
     "react-s-alert": "^1.4.1",
@@ -23,7 +37,13 @@
     "react-to-print": "^2.12.6",
     "reactstrap": "^8.9.0",
     "recharts": "^2.0.9",
+<<<<<<< HEAD
     "rumble-charts": "^3.1.2"
+=======
+    "rumble-charts": "^3.1.2",
+    "styled-components": "^5.3.0",
+    "uuid": "^8.3.2"
+>>>>>>> f2cd55581963bcbc124e2ee1622cc5a0fec16fee
   },
   "scripts": {
     "start": "react-scripts start",

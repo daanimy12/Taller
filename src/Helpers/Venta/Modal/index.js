@@ -4,7 +4,11 @@ import Helpers from '../'
 import Search from '../icons/search.png';
 import Item from './Item';
 import Fail from './Fail';
+<<<<<<< HEAD
 import '../../../css/Ventas.css';
+=======
+import '../../../system/styles/Ventas.css';
+>>>>>>> f2cd55581963bcbc124e2ee1622cc5a0fec16fee
 import QrReader from "react-qr-reader";
 
 //Prueba

@@ -3,7 +3,11 @@ import Modal_View from '../Helpers/Venta/Modal';
 import Modal_Pay from '../Helpers/Venta/Modal/Pay';
 import Products from '../Helpers/Venta/icons/products.png';
 import Pay from '../Helpers/Venta/icons/pay_icon.png';
+<<<<<<< HEAD
 import '../css/Ventas.css';
+=======
+import '../system/styles/Ventas.css';
+>>>>>>> f2cd55581963bcbc124e2ee1622cc5a0fec16fee
 import Selector from '../Helpers/Venta/Modal/Select_account_pay'
 
 class index extends Component {
