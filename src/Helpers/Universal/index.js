@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import  modelo from '../../Model/firebaseUni';
-=======
 import  modelo from '../../system/model';
->>>>>>> f2cd55581963bcbc124e2ee1622cc5a0fec16fee
 
 class Universal {
     static ConsultaUniversalSinKey=(ref)=>{

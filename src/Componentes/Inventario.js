@@ -22,24 +22,14 @@ class Inventario extends Component {
             <div>
                 <MenuInventario/>
                 <Switch>
-<<<<<<< HEAD
-                    <Route path='/Principal/Inventario/AgregarProduc' component={AgregarProducto}/>
-                    <Route path='/Principal/Inventario/Extras' component={Union}/>
-                    <Route path='/Principal/Codigos' component={Codigo}/>
-=======
                     <Route path='/Customers/Inventario/AgregarProduc' component={AgregarProducto}/>
                     <Route path='/Customers/Inventario/Extras' component={Union}/>
                     <Route path='/Customers/Codigos' component={Codigo}/>
->>>>>>> f2cd55581963bcbc124e2ee1622cc5a0fec16fee
                     <Route component={Error} />
                 </Switch>
             </div>   :
             <Switch>
-<<<<<<< HEAD
-                <Route path='/Principal/Inventario/AgregarProduc' component={AgregarProducto}/>
-=======
                 <Route path='/Customers/Inventario/AgregarProduc' component={AgregarProducto}/>
->>>>>>> f2cd55581963bcbc124e2ee1622cc5a0fec16fee
                 <Route component={Error} />
             </Switch>;
         return (

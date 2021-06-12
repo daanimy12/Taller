@@ -1,11 +1,7 @@
 import React, {Component} from 'react';
 import Filtros from '../Helpers/Reportes/Filtros';
 import Alert from "react-s-alert";
-<<<<<<< HEAD
-import '../css/Reportes.css';
-=======
 import '../system/styles/Reportes.css';
->>>>>>> f2cd55581963bcbc124e2ee1622cc5a0fec16fee
 class Reportes extends Component {
 
     componentWillMount() {

@@ -1,10 +1,4 @@
-<<<<<<< HEAD
-import {firebaseDatabase} from '../../Conexion/fire'
-import Helper_Usuario from '../Login'
-import Helper from './Fecha'
-=======
 import {firebaseDatabase} from '../../system/model/firebase/firebase'
->>>>>>> f2cd55581963bcbc124e2ee1622cc5a0fec16fee
 
 class index {
     static cantidad(porcentaje = 0, number = 0, nivel) {

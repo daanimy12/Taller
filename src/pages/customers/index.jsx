@@ -35,11 +35,7 @@ const Customers = (props) => {
         phone: '',
         description: '',
         brand: '',
-<<<<<<< HEAD
-
-=======
         edit: false,
->>>>>>> 40106371216e0edda3abacd9df8859033e7221e6
 
         // Antiguos datos
         TablaVacia: true,
@@ -60,27 +56,6 @@ const Customers = (props) => {
         setState(prev => ({ ...prev, [name]: value}));
     };
 
-<<<<<<< HEAD
-    const loadUpdate = (valor) => {
-        textInput.current.focus();
-        setState(prev => ( {
-            ...prev,
-            Fecha: valor.Fecha,
-            TitleButtonDeAc: valor.Estado ? 'Desactivar' : 'Activar',
-            pass: '',
-            nombre: valor.Nombre,
-            AP: valor.ApellidoPa,
-            AM: valor.ApellidoMa,
-            usuario: valor.Usuario,
-            KeyModi: valor.Key,
-            Codigo: valor.CB,
-            Teleno: valor.Teleno
-        } ));
-
-    };
-=======
-
->>>>>>> 40106371216e0edda3abacd9df8859033e7221e6
 
 
     const tableCustomers = (value) => {
@@ -118,35 +93,9 @@ const Customers = (props) => {
             description: '',
             brand: '',
             TitleButtonDeAc: 'Desactivar',
-<<<<<<< HEAD
-        }));
-    };
-    const deleteFunct =  async () => {
-        setState(prev => ({ ...prev, Conexion: true}));
-        if (state.KeyModi !== null) {
-            setState(prev => ({ ...prev,TablaVacia: true}));
-            let ValorAE;
-            (state.TitleButtonDeAc === "Desactivar") ? ValorAE = false : ValorAE = true;
-            try {
-                await Universal.UpdateUniversal('Clientes/' + state.KeyModi, {'Estado': ValorAE});
-                setState(prev => ({ ...prev,Conexion: false}));
-                cancel();
-                NotificationManager.success('Cliente Modificado');
-                await consulta();
-            }catch (e) {
-                NotificationManager.error("Error en el servidor")
-            }
-        } else {
-            setState(prev=>({...prev,Conexion: false}));
-            cancel();
-            NotificationManager.error('Seleccione un Cliente');
-        }
-    };
-=======
             edit: false
         }));
     };
->>>>>>> 40106371216e0edda3abacd9df8859033e7221e6
 
     React.useEffect(
         async () =>{
@@ -155,61 +104,6 @@ const Customers = (props) => {
         }, []
     );
 
-<<<<<<< HEAD
-    const onChangeCode = (code) => {
-        setState(prev=>({...prev,Codigo: code}));
-    }
-
-    const codeBar = () => {
-        const p = state.ListaImprimirBarras[state.ListaImprimirBarras.length - 1];
-        if (p !== undefined) {
-            const UltimoCodigo = p.Codigo;
-            const NumeroSinCeros = parseInt(UltimoCodigo.substr(1, UltimoCodigo.length));
-            let ArrayMas = [];
-            for (let i = 1; i <= 20; i++) {
-                ArrayMas.push(
-                    <>
-                        <Barcode key={i} value={'C' + ClienteH.ConvertirCodigoValido(NumeroSinCeros + i, 7)}/>
-                        <QRCode key={i} value={'C' + ClienteH.ConvertirCodigoValido(NumeroSinCeros + i, 7)}/>
-                    </>
-                );
-                Universal.PushUniversal('CodigosBarras',
-                    {'Estado': true, "Codigo": 'C' + ClienteH.ConvertirCodigoValido(NumeroSinCeros + i, 7)});
-            }
-            history.push({
-                pathname: "/Customers/Codigos",
-                Codigos: ArrayMas
-            });
-        } else {
-            let ArrayMas = [];
-            for (let i = 1; i <= 20; i++) {
-                ArrayMas.push(
-                    <>
-                        <Barcode value={'C' + ClienteH.ConvertirCodigoValido(0 + i, 7)}/>
-                        <QRCode value={'C' + ClienteH.ConvertirCodigoValido(0 + i, 7)}/>
-                    </>
-                );
-                Universal.PushUniversal('CodigosBarras',
-                    {'Estado': true, "Codigo": 'C' + ClienteH.ConvertirCodigoValido(0 + i, 7)});
-            }
-            history.push({
-                pathname: "/Customers/Codigos",
-                Codigos: ArrayMas
-            });
-        }
-    }
-    const codeBarPersonal = () => {
-        history.push({
-            pathname: "/Customers/Codigos",
-            Codigos: <>
-                <Barcode value={state.Codigo}/>
-                <QRCode value={state.Codigo}/>
-            </>
-        });
-    }
-
-=======
->>>>>>> 40106371216e0edda3abacd9df8859033e7221e6
     const validateVarEmpty = (value) => {
         return value !== "";
     }
@@ -221,12 +115,8 @@ const Customers = (props) => {
             phone,
             description,
             modelCar,
-<<<<<<< HEAD
-            brand
-=======
             brand,
             edit
->>>>>>> 40106371216e0edda3abacd9df8859033e7221e6
         } = state;
         if (
            validateVarEmpty(name) &&
@@ -245,17 +135,6 @@ const Customers = (props) => {
                 description,
                 modelCar,
                 brand,
-<<<<<<< HEAD
-                createdAt: new Date(),
-                invoice: uuid(),
-                status: 1
-            };
-            await Universal.PushUniversal("Clientes", payload );
-            setState(prev=> ({...prev,Conexion: false}));
-            await consulta();
-            NotificationManager.success("Cliente agregado");
-            await cancel();
-=======
                 status: edit ? state.status : 1
             };
 
@@ -274,7 +153,6 @@ const Customers = (props) => {
                 NotificationManager.success("Cliente agregado");
                 await cancel();
             }
->>>>>>> 40106371216e0edda3abacd9df8859033e7221e6
         } else {
             NotificationManager.error("Datos Vacíos")
         }
@@ -282,15 +160,11 @@ const Customers = (props) => {
     }
 
     const onSelectData = async (obj) => {
-<<<<<<< HEAD
-        console.log(obj)
-=======
         setState( prev => ( {
             ...prev,
             ...obj,
             edit: true
         }))
->>>>>>> 40106371216e0edda3abacd9df8859033e7221e6
     }
 
     const Tabla = state.TablaVacia ? <Preload/>
@@ -363,11 +237,7 @@ const Customers = (props) => {
                             </div>
 
                             <hr/>
-<<<<<<< HEAD
-                            <button type="button" onClick={onSubmitForm}> Aceptar </button>
-=======
                             <button type="button" onClick={onSubmitForm}> { state.edit ? "Actualizar" : "Aceptar" }  </button>
->>>>>>> 40106371216e0edda3abacd9df8859033e7221e6
                         </form>
                     </article>
                     <article>

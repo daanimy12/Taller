@@ -1,9 +1,5 @@
 import React, {Component} from 'react';
-<<<<<<< HEAD
-import '../css/Reportes.css';
-=======
 import '../system/styles/Reportes.css';
->>>>>>> f2cd55581963bcbc124e2ee1622cc5a0fec16fee
 import AgregarCategory from "../SubComponentes/AgregarCategory";
 import AgregarProvedor from "../SubComponentes/AgregarProvedor";
 class index extends Component {

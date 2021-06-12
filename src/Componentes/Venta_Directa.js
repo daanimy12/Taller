@@ -1,16 +1,9 @@
 import React, {Component} from 'react';
 import HelpersVenta from '../Helpers/Venta';
-<<<<<<< HEAD
-import {firebaseDatabase} from "../Conexion/fire";
-import Preload from './Preload'
-import Collect from '../Helpers/Venta_Directa/Collect';
-import '../css/Venta_Directa.css';
-=======
 import {firebaseDatabase} from "../system/model/firebase/firebase";
 import Preload from './Preload'
 import Collect from '../Helpers/Venta_Directa/Collect';
 import '../system/styles/Venta_Directa.css';
->>>>>>> f2cd55581963bcbc124e2ee1622cc5a0fec16fee
 import {Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import Scanner from "../Helpers/Venta/Modal/Scanner";
 import QrReader from "react-qr-reader";

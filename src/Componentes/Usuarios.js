@@ -1,15 +1,8 @@
 import React, {Component} from 'react';
-<<<<<<< HEAD
-import {firebaseDatabase} from '../Conexion/fire';
-import CryptoJS from 'crypto-js';
-import Alert from 'react-s-alert';
-import '../css/Usuario.css';
-=======
 import {firebaseDatabase} from '../system/model/firebase/firebase';
 import CryptoJS from 'crypto-js';
 import Alert from 'react-s-alert';
 import '../system/styles/Usuario.css';
->>>>>>> f2cd55581963bcbc124e2ee1622cc5a0fec16fee
 import PreloadC from '../Componentes/PreloadCarga';
 import Universal from '../Helpers/Universal';
 import ModalUniversal from '../Helpers/ModalUniversal';

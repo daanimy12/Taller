@@ -1,23 +1,11 @@
 import React, {Component} from 'react';
-<<<<<<< HEAD
-import '../../../css/Reportes.css';
-=======
 import '../../../system/styles/Reportes.css';
 
->>>>>>> f2cd55581963bcbc124e2ee1622cc5a0fec16fee
 class index extends Component {
     state={
 
 }
-<<<<<<< HEAD
-
-    static getDerivedStateFromProps (nextProps, prevState) {
-
-        return null;
-    }render() {
-=======
     render() {
->>>>>>> f2cd55581963bcbc124e2ee1622cc5a0fec16fee
         return (
             <div className="CajaTabla">
                 <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
