@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import Usuarios from '../../Componentes/Usuarios';
+import Usuarios from '../user/Usuarios';
 import Ofertas from '../../Componentes/Ofertas';
 import Inventario from '../../Componentes/Inventario';
 import Venta from '../../Componentes/Venta';
