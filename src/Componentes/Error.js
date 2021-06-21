@@ -1,5 +1,6 @@
 import React from 'react';
 import Login from "../Helpers/Login";
+
 const Error = () => {
     const {
         CambioURL

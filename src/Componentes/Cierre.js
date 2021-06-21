@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BrowserRouter,Switch,Route} from "react-router-dom";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 
 import Dashboard from "../Helpers/Cierre/Vista_Dashboard";
 import Detalles from "../Helpers/Cierre/Vista_Detalles";

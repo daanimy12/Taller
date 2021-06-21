@@ -26,22 +26,12 @@ const NavBar = (props) => {
 
     const cambio = (e) => {
         history.push('/Customers/'+[e.target.id]);
-        window.location.reload();
     };
     const salir = () => {
         // Eliminacion de token //
         history.push('/');
         Login.Eliminar();
-        window.location.reload();
     };
-
-    const menuB= () => {
-        if(state.Stilo === 'ulInicial'){
-            setState(prev => ({...prev,Stilo:'ulInicial1'}));
-        }else{
-            setState(prev=>({...prev,Stilo:'ulInicial'}))
-        }
-    }
 
     const Menu =  (Cliente === "Administrador") ?
         <ul className={state.Stilo}>
@@ -58,45 +48,9 @@ const NavBar = (props) => {
                 </label>
             </li>
             <li>
-                <label id='Inventario/AgregarProduc' onClick={cambio}>
+                <label id='Notas' onClick={cambio}>
                     <Inventory className="iconNavBar" />
-                    Inventario
-                </label>
-            </li>
-            <li>
-                <label id='Ofertas' onClick={cambio}>
-                    <Offer className="iconNavBar" />
-                    Ofertas
-                </label>
-            </li>
-            <li>
-                <label id='Venta_Directa' onClick={cambio}>
-                    <BurstSale className="iconNavBar" />
-                    Venta Directa
-                </label>
-            </li>
-            <li>
-                <label id='Venta' onClick={cambio}>
-                    <Table className="iconNavBar" />
-                    Mesas
-                </label>
-            </li>
-            <li>
-                <label id='Reportes' onClick={cambio}>
-                    <Report className="iconNavBar" />
-                    Reportes
-                </label>
-            </li>
-            <li>
-                <label id='Limites' onClick={cambio}>
-                    <Settings className="iconNavBar" />
-                    Configuración
-                </label>
-            </li>
-            <li>
-                <label id='Cierre_de_Caja/Dashboard' onClick={cambio}>
-                    <CashRegister className="iconNavBar" />
-                    Cierre de Caja
+                    Notas
                 </label>
             </li>
             <li>
@@ -110,16 +64,6 @@ const NavBar = (props) => {
             <li>
                 <label id='Inventario/AgregarProduc' onClick={cambio}>
                     Inventario
-                </label>
-            </li>
-            <li>
-                <label id='Venta_Directa' onClick={cambio}>
-                    Venta Directa
-                </label>
-            </li>
-            <li>
-                <label id='Venta' onClick={cambio}>
-                    Mesas
                 </label>
             </li>
             <li>

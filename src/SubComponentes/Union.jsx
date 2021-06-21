@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import '../system/styles/Reportes.css';
-import AgregarCategory from "../SubComponentes/AgregarCategory";
-import AgregarProvedor from "../SubComponentes/AgregarProvedor";
+import AgregarCategory from "./AgregarCategory";
+import AgregarProvedor from "./AgregarProvedor";
 class index extends Component {
     state={
 
