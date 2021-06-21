@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.11.4",
     "@styled-icons/boxicons-regular": "^10.34.0",
     "@styled-icons/boxicons-solid": "^10.34.0",
     "@styled-icons/fa-solid": "^10.34.0",
@@ -28,6 +29,7 @@
     "react-s-alert": "^1.4.1",
     "react-scripts": "4.0.3",
     "react-select": "^4.3.1",
+    "react-swipeable-views": "^0.14.0",
     "react-to-print": "^2.12.6",
     "reactstrap": "^8.9.0",
     "recharts": "^2.0.9",
