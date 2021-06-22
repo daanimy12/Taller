@@ -2,6 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import Usuarios from '../user/Usuarios';
 import NoteContainer from "../notes/noteContainer"
+import Inventory from '../inventory/Inventory';
 import Venta from '../../Componentes/Venta';
 import Venta_Directa from '../../Componentes/Venta_Directa';
 import Index from '../../Componentes/navBar';
@@ -39,6 +40,7 @@ const Customers = (props) => {
                 <Route path='/Customers/Usuarios' component={Usuarios} />
                 <Route path='/Customers/Clientes' component={Cliente} />
                 <Route path='/Customers/Notas' component={NoteContainer} />
+                <Route path='/Customers/Inventario' component={Inventory} />
             </Switch>
             :
             <Switch>

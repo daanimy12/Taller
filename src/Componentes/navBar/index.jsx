@@ -54,6 +54,12 @@ const NavBar = (props) => {
                 </label>
             </li>
             <li>
+                <label id='Inventario' onClick={cambio}>
+                    <Settings className="iconNavBar" />
+                    Inventario
+                </label>
+            </li>
+            <li>
                 <label onClick={salir} >
                     <Exit className="iconNavBar" />
                     Salir
