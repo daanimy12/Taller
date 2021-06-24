@@ -2,11 +2,15 @@ import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 import { colorPalette } from "../../system/styles/styles";
 
+
 const inicialValuesF = {
   folio: '',
   names: '',
   amount: 0,
   description: '',
+  photo: null,
+  img: null,
+  photoP: null,
 }
 
 const Form = (props) => {
@@ -21,12 +25,29 @@ const Form = (props) => {
     }
     ));
   };
+
   const resetForm = () => {
     setState({ ...inicialValuesF });
   }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     addOrEdit(state, resetForm);
+  };
+
+  const imageHandler = (e) => {
+    const reader = new FileReader();
+    const photo = e.target.files[0];
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setState(prev => ({
+          ...prev,
+          photoP: reader.result,
+          photo,
+        }));
+      }
+    };
+    reader.readAsDataURL(e.target.files[0])
   };
 
   useEffect(() => {
@@ -47,6 +68,7 @@ const Form = (props) => {
           value={state.folio}
           onChange={onChangeInput}
           required
+          // readOnly
         />
       </div>
       <div className="boxInput" >
@@ -77,6 +99,25 @@ const Form = (props) => {
           onChange={onChangeInput}
           required
         />
+      </div>
+      <div className="boxInput" >
+        <label> Imagen: </label>
+        <input
+          name="photo"
+          onChange={imageHandler}
+          accept="image/*"
+          id="icon-button-file"
+          type="file"
+          required
+        />
+      </div>
+      <br />
+      <div className="boxInput" >
+        {
+          state.photoP != null ?
+            <img src={""} alt="photo" id="myimg" style={{ width: 328, height: 285 }} /> :
+            <progress></progress>
+        }
       </div>
       <button type="submit"> Aceptar </button>
     </form>

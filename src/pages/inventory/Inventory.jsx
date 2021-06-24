@@ -21,20 +21,47 @@ const Inventory = (props) => {
         }
 
     }
-
+  const onFileChange = async (resp) => {
+    const url = await Universal.PushImagen("/HerramientasYRefacciones", resp);
+    const response = url;
+    return response;
+  }
+    //successfully added.. items
     const addOrEdit = async (values, resetForm) => {
         try {
-            await Universal.PushUniversal("Inventario", values);
-            NotificationManager.success("Herramienta o Refacción agregado");
-            resetForm();
-            await getInvetory();
+          const copyArr = { ...values };
+          const photo = copyArr.photo;
+          //send data
+          const {
+            amount,
+            description,
+            folio,
+            names,
+            img,
+          } = copyArr;
+
+          const playload = {
+            amount,
+            description,
+            folio,
+            names,
+            img,
+          };
+          const getUrlPhoto = await onFileChange(photo);
+          const url = getUrlPhoto[0];
+          playload.img = url.toString();
+          const newArr = { ...playload };
+          await Universal.PushUniversal("Inventario", newArr)
+          NotificationManager.success("Herramienta o Refacción agregado");
+          // resetForm();
+          await getInvetory();
         } catch (error) {
             console.log('error: ', error);
-            NotificationManager.error('Ocurrió un error');
+          NotificationManager.error('Ocurrió un error: Faltan datos');
         }
 
     }
-
+  console.log('state: ', state)
     useEffect(async () => {
         try {
             await getInvetory();
@@ -49,11 +76,11 @@ const Inventory = (props) => {
                 <header> Agregar Herramienta / Refacción </header>
                 <section>
                     <article>
-                        <Form addOrEdit={addOrEdit} />
+                <Form addOrEdit={addOrEdit} />
                     </article>
                     <article>
                         <div className="boxMain">
-                            <TableInventory values={state} />
+                  <TableInventory values={state} />
                         </div>
                     </article>
                 </section>

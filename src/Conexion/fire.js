@@ -8,7 +8,7 @@ var firebaseConfig = {
     authDomain: "ciber-3c532.firebaseapp.com",
     databaseURL: "https://ciber-3c532.firebaseio.com",
     projectId: "ciber-3c532",
-    storageBucket: "ciber-3c532.appspot.com",
+    storageBucket: "gs://tallerdaniel-7fa3d.appspot.com",
     messagingSenderId: "920959712240",
     appId: "1:920959712240:web:a58e7d0d46ac756b"
 };
