@@ -39,19 +39,6 @@ const Loggin = (props) => {
         } catch (e) {
             error_inesperado();
         }
-
-
-        //     .then(function (snapshot) {
-        //     return snapshot;
-        // }).then(e => {
-        //     console.log(e)
-        //     return HelpersLogin.Validar(e, password);
-        // }).then(i => {
-        //     if (i === false) error();
-        //     if (i.boolean === true) success(i);
-        // }).catch(e => {
-        //     error_inesperado();
-        // })
     }
 
     const revisador = (data = '') => {
@@ -69,13 +56,14 @@ const Loggin = (props) => {
     const updatestate = (e) => {
         const name = e.target.id;
         const value = e.target.value;
+        console.log(state)
         setState(prev => ({...prev,[name]: value}));
     };
 
     const onKeyPress = e => {
         if (e.key === "Enter" && !e.shiftKey) {
             e.preventDefault();
-            validar();
+            validar().then();
         }
     }
 
@@ -91,7 +79,7 @@ const Loggin = (props) => {
     }
 
     const success_observador = (date='') => {
-       // console.log(date)
+        // console.log(date)
         if(date === 'Vendedor'){
             HelpersLogin.CambioURL('/Customers/Venta')
         }else{
@@ -119,20 +107,20 @@ const Loggin = (props) => {
     }
 
 
-        return (
-            <div className={className}>
-                <form id="form" ref={formRef} >
-                    <img src="https://i.pinimg.com/originals/97/95/eb/9795ebef9b85576509c37dfce0c8aed8.jpg" alt="logo"/>
-                    <label id="label" htmlFor="email">Usuario:</label>
-                    <input type="email" id="email" onChange={updatestate} value={state.email}/>
-                    <label id="label" htmlFor="password">Password:</label>
-                    <input type="password" id="password" onKeyPress={onKeyPress}
-                           value={state.password}
-                           onChange={updatestate}/>
-                    <button type="button" onClick={validar}> Aceptar </button>
-                </form>
-            </div>
-        );
+    return (
+        <div className={className}>
+            <form id="form" ref={formRef} >
+                <img src="https://i.pinimg.com/originals/97/95/eb/9795ebef9b85576509c37dfce0c8aed8.jpg" alt="logo"/>
+                <label id="label" htmlFor="email">Usuario:</label>
+                <input type="email" id="email" onChange={updatestate} value={state.email}/>
+                <label id="label" htmlFor="password">Password:</label>
+                <input type="password" id="password" onKeyPress={onKeyPress}
+                       value={state.password}
+                       onChange={updatestate}/>
+                <button type="button" onClick={validar}> Aceptar </button>
+            </form>
+        </div>
+    );
 
 }
 

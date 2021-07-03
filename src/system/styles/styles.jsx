@@ -7,6 +7,6 @@ export const colorPalette = {
     blue: "rgb(20,141,255)",
     gray: "rgb(255,255,255,0.45)",
     white: "rgb(255,255,255)",
-    fontMain: "Arial san-serif",
+    fontMain: "sans-serif Arial",
     boxShadowLigth: "7px 6px 10px -1px rgba(0,0,0,0.37)"
 }

@@ -13,7 +13,7 @@ const MainNote = styled.main`
   section {
     font-family: ${colorPalette.fontMain};
     display: grid;
-    grid-template-columns: 40% 60%;
+    grid-template-columns: 50% 50%;
     width: 100%;
     height: calc(100vh - 50px);
     article {

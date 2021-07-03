@@ -3,11 +3,8 @@ import styled from "styled-components";
 import Preload from '../../Componentes/Preload';
 import PreloadC from '../../Componentes/PreloadCarga';
 import Universal from "../../Helpers/Universal";
-import Barcode from 'react-barcode';
-import ClienteH from '../../Helpers/Clientes';
 import TablaDinamica from "../../Helpers/TablaDinamica";
 import TablaR from "../../Componentes/customers/tableCustomers";
-import QRCode from 'qrcode.react';
 import {NotificationManager} from "react-notifications";
 import {useHistory} from "react-router-dom";
 import {colorPalette} from "../../system/styles/styles";
@@ -23,9 +20,7 @@ const Customers = (props) => {
         'Usuario',
         'Fecha'
     ];
-    const history = useHistory();
     const CambiosJson = {"CB": 'Codigo'};
-    const textInput = React.createRef();
     const [state, setState] = React.useState({
         // Nuevos datos
         name: '',
@@ -70,10 +65,6 @@ const Customers = (props) => {
 
     const consulta = async () => {
         try {
-            const data = await Universal.ConsultaSelectOrder('CodigosBarras', 'Estado', true);
-            setState( prev=> ({...prev, Codigos: data}));
-            const codeBars = await Universal.ConsultaUniversal('CodigosBarras');
-            setState(prev => ({...prev,ListaImprimirBarras: codeBars }))
             const customers = await Universal.ConsultaUniversal('Clientes');
             setState( prev => ({ ...prev, TablaVacia: false, OfetasTotal: customers}) );
             tableCustomers(customers)
