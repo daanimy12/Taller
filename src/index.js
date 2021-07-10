@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import App from './pages/main/App';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as serviceWorker from './serviceWorker';
 // mandatory
-import 'react-s-alert/dist/s-alert-default.css';
+import 'react-notifications/lib/notifications.css';
 
 // optional - you can choose the effect you want
 import 'react-s-alert/dist/s-alert-css-effects/slide.css';

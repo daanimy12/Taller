@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import '../css/Ventas.css'
+import '../system/styles/Ventas.css'
 
 class Preload extends Component {
 

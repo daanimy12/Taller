@@ -1,16 +1,19 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Login from "../Helpers/Login";
-class Error extends Component {
 
-    componentWillMount() {
-        Login.CambioURL('/');
-    }
+const Error = () => {
+    const {
+        CambioURL
+    } = Login()
+    React.useEffect ( () =>  {
+        CambioURL('/');
+        // console.log("Entro aki")
+    },[])
 
-    render() {
-        return(
-            <div></div>
-        );
-    }
+    return(
+        <div></div>
+    );
+
 }
 
 export default Error;

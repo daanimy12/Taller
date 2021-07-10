@@ -6,6 +6,8 @@
 /.pnp
 .pnp.js
 /.idea
+./firenabase.json,
+./**/.*,
 # testing
 /coverage
 

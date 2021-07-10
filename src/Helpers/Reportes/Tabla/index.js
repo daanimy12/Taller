@@ -1,14 +1,11 @@
 import React, {Component} from 'react';
-import '../../../css/Reportes.css';
+import '../../../system/styles/Reportes.css';
+
 class index extends Component {
     state={
 
 }
-
-    static getDerivedStateFromProps (nextProps, prevState) {
-
-        return null;
-    }render() {
+    render() {
         return (
             <div className="CajaTabla">
                 <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">

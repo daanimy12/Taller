@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { createBrowserHistory as createHistory} from 'history';
-import '../css/Inventario.css';
+import '../system/styles/Inventario.css';
 const history = new createHistory();
 class MenuInventario extends Component {
 
@@ -9,7 +9,7 @@ class MenuInventario extends Component {
     }
 
     Cambio = (e) => {
-        history.push('/Principal/Inventario/'+[e.target.id]);
+        history.push('/Customers/Inventario/'+[e.target.id]);
         window.location.reload();
     };
 

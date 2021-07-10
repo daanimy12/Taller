@@ -1,13 +1,22 @@
 import React from 'react';
+import styled from "styled-components";
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Loggin from './Componentes/Loggin';
 import Principal from './Componentes/Principal';
-import './App.css';
 import Error from "./Componentes/Error";
+import { colorPalette } from "./system/styles/styles";
 
-function App() {
+const ContainerMain = styled.main`
+    
+    p, label, a, body, h1, h2, h3, h4,li, ol,ul, input {
+      font-family: ${colorPalette.fontMain};
+    }
+
+`;
+
+const App = () => {
   return (
-      <div className="App">
+      <ContainerMain>
         <div className="page">
           <BrowserRouter>
             <Switch>
@@ -19,7 +28,7 @@ function App() {
           </BrowserRouter>
 
         </div>
-      </div>
+      </ContainerMain>
   );
 }
 

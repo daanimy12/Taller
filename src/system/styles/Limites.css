@@ -1,0 +1,23 @@
+.title_configuracion {
+    text-align: center;
+    padding: 15px;
+    background-color: #625BC2;
+    color: white;
+}
+
+.title_configuraciones {
+    text-align: left;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+}
+
+.input_configuraciones {
+    border: black 1px solid;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-top-width: 0px;
+    color: black;
+    padding-bottom: 30px;
+    padding-top: 15px;
+}

@@ -1,0 +1,327 @@
+html {
+    height: 100%;
+    width: 100%;
+}
+.show{
+    display:block;
+}
+label{
+    cursor: pointer;
+}
+.col-auto{
+    margin: 3%;
+}
+.ra{
+    margin: 2%;
+}
+.none{
+    display: none;
+}
+#Fondo1{
+    /* background-image: url('../imagenes/fondo2.jpg'); */
+    /* background-size: 100%; */
+    filter: blur(6px);
+    background-position:center;
+    /* height: 100%; */
+}
+#menu{
+    /* background-color: black; */
+    height: 100%;
+    color: #000;
+    padding-top: 15%;
+    font-size: calc(10px + 2vmin);
+
+}
+a:checked, a {
+    text-decoration:none;
+    color: white;
+    font-size: calc(10px + 2vmin);
+}
+li{
+    list-style: none;
+}
+.ulInicial{
+    padding-top: 15%;
+    padding-left: auto;
+    padding-right: auto;
+    text-align: center
+}
+
+#menu ul li {
+    /* background-color:#2e518b; */
+    display:block;
+    color:#fff;
+    text-decoration:none;
+    /* font-weight:400; */
+    font-size: calc(3px + 2vmin);
+    padding:7%;
+    font-family:"HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+#menu ul a {
+    display:block;
+    color:#fff;
+    text-decoration:none;
+    font-weight:400;
+    font-size: calc(3px + 2vmin);
+    padding:10px;
+    font-family:"HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.show{
+    display:block;
+}
+#menu ul li {
+    /* position:relative;
+    float:left;
+    margin:0;
+    padding:0; */
+    cursor: pointer;
+}
+
+#menu ul li ul li:checked {
+    /* background:#5b78a7; */
+    padding-left: 15%;
+}
+
+#menu ul ul {
+    /*display:none;
+    /* position:absolute; */
+    top:50%;
+    left:60%;
+    padding:0;
+}
+
+#menu ul ul li {
+    float:none;
+    width: 120%
+}
+
+#menu ul ul a {
+    line-height:120%;
+    /* padding: 10px 15px; */
+}
+
+#menu ul li:checked > ul {
+    display:block;
+}
+@media (max-width: 992px) and (min-width: 768px){
+    #Fondo{
+        padding: 0%;
+    }
+    #menu ul li ul li:checked {
+        /* background:#5b78a7; */
+        padding-left: 2%;
+    }
+    #menu ul a {
+        display:block;
+        color:#fff;
+        text-decoration:none;
+        font-weight:400;
+        font-size: calc(1px + 2vmin);
+        /* padding:2px; */
+        font-family:"HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        /* text-transform:uppercase; */
+        /* letter-spacing:1px; */
+    }
+
+    #menu ul li {
+        /* background-color:#2e518b; */
+        display:block;
+        color:#fff;
+        text-decoration:none;
+        /* font-weight:400; */
+        font-size: calc(1px + 2vmin);
+        /* padding:10px; */
+        font-family:"HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        /* text-transform:uppercase;
+        letter-spacing:1px; */
+    }
+
+    #menu ul li {
+        /* position:relative;
+        float:left;
+        margin:0;
+        padding:0; */
+        cursor: pointer;
+    }
+
+    #menu ul ul {
+        /* display:none;
+         /* position:absolute; */
+        top:50%;
+        left:40%;
+        padding:0;
+    }
+
+    #menu ul ul li {
+        float:none;
+        width: 120%
+    }
+
+    #menu ul ul a {
+        line-height:120%;
+        /* padding: 10px 15px; */
+    }
+
+
+}
+
+/* Responsivilidad */
+.menu_bar{
+    display:none;
+}
+.header1{
+    color:#fff;
+}
+
+
+/*Resuolucioon maxima de 768px para celulares*/
+@media screen and (max-width:767px ) {
+
+    .ulInicial{
+        padding-top: 8%;
+        padding-left: auto;
+        padding-right: auto;
+        text-align: center;
+        display: none;
+    }
+
+    .ulInicial1{
+        padding-top: 8%;
+        padding-left: auto;
+        padding-right: auto;
+        text-align: center;
+        display: block;
+    }
+
+    .menu_bar {
+        display:block;
+        width:100%;
+        padding-left: 3%;
+        /* background:#ccc; */
+    }
+
+    .menu_bar .bt-menu {
+        display:block;
+        /* padding:20px; */
+        /* background:#024959; */
+        color:#fff;
+        text-decoration:none;
+        font-weight: bold;
+        font-size:25px;
+        -webkit-box-sizing:border-box;
+        -moz-box-sizing:border-box;
+        box-sizing:border-box;
+    }
+    .menu_bar  {
+        float:right;
+        font-size: calc(10px + 2vmin);
+        margin-top: 1%;
+    }
+
+    #Fondo1{
+        filter: blur(6px);
+        background-position:center;
+        width: 100%;
+        height: 15%;
+        padding: 0%;
+
+    }
+    #menu{
+        /* background-color: black; */
+        height: 100%;
+        color: #000;
+        padding-top: 0%;
+        font-size: calc(10px + 2vmin);
+
+    }
+    a:checked, a {
+        text-decoration:none;
+        color: white;
+        font-size: calc(10px + 2vmin);
+    }
+    li{
+        background-color: rgba(0,0,0,.7);
+        list-style: none;
+    }
+
+
+    #menu ul li {
+        display:block;
+        color:#fff;
+        text-decoration:none;
+        font-size: calc(5px + 2vmin);
+        padding:5%;
+        font-family:"HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        text-transform:uppercase;
+        letter-spacing:1px;
+    }
+    #menu ul a {
+        display:block;
+        color:#fff;
+        text-decoration:none;
+        font-weight:400;
+        font-size: calc(2px + 2vmin);
+        padding:2%;
+        font-family:"HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        text-transform:uppercase;
+        letter-spacing:1px;
+    }
+    #menu ul li a {
+        display:block;
+        color:#fff;
+        text-decoration:none;
+        font-weight:400;
+        font-size: calc(5px + 2vmin);
+        padding:2%;
+        font-family:"HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        text-transform:uppercase;
+        letter-spacing:1px;
+    }
+
+    #menu ul li {
+        cursor: pointer;
+    }
+
+    #menu ul li ul li:checked {
+        padding-left: 5%;
+        margin-top: 3%;
+    }
+    #menu ul li ul li a{
+        font-size: calc(3px + 2vmin);
+    }
+
+    #menu ul ul {
+        /*display:none;*/
+        top:50%;
+        left:60%;
+        padding:0;
+    }
+
+    #menu ul ul li {
+        float:none;
+        width: 120%
+    }
+
+    #menu ul ul a {
+        line-height:120%;
+        /* padding: 10px 15px; */
+    }
+
+    #menu ul li:checked > ul {
+        display:block;
+    }
+
+    .show{
+        display:block;
+    }
+
+    .none{
+        display: none;
+    }
+
+}

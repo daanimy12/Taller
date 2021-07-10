@@ -1,4 +1,4 @@
-import  modelo from '../../Model/firebaseUni';
+import  modelo from '../../system/model';
 
 class Universal {
     static ConsultaUniversalSinKey=(ref)=>{

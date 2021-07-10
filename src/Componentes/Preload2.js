@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import "../css/Preload2.css";
+import "../system/styles/Preload2.css";
 class Preload extends Component {
 
     state = {

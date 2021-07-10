@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import HelpersVenta from '../Helpers/Venta';
-import {firebaseDatabase} from "../Conexion/fire";
+import {firebaseDatabase} from "../system/model/firebase/firebase";
 import Preload from './Preload'
 import View_Table from '../Table_View'
-import '../css/Ventas.css'
+import '../system/styles/Ventas.css'
 
 class Venta extends Component {
 
