@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { colorPalette } from "../../system/styles/styles";
-import Universal from "../../Helpers/Universal";
-import moment from "moment";
 
 const FormMain = styled.form`
   padding: 10px;
@@ -40,70 +38,12 @@ const FormMain = styled.form`
   
 `;
 
-const TabPersonalData = () => {
-
-    const [arrayCustomers,setArrayCustomers] = React.useState([]);
-    const [state,setState] = React.useState(
-        {
-            folio: "",
-            name: "",
-            direction: "",
-            modelCar: "",
-            brand: "",
-            licensePlate: "",
-            createdAt: `${moment().format("YYYY-MM-DD")}`,
-            lastName: "",
-            total: 0,
-            customer: ""
-        }
-    );
-
-    const onFolio = () => {
-        const data = `SAuto-${Math.floor(Math.random() * 999999)}`;
-        setState( prev => ({ ...prev, folio: data }));
-    }
-
-    const loadCustomers = async () => {
-        const customers = await Universal.ConsultaUniversal('Clientes');
-        setArrayCustomers(customers);
-    }
-
-    React.useEffect(
-        () => {
-            onFolio();
-            loadCustomers().then();
-        }, []
-    )
-
-    const onSelectCustomer = (id) => {
-        const findData = arrayCustomers.find( (customer) => customer?.invoice === id );
-        console.log(findData)
-        const {
-            name,
-            lastName,
-            brand,
-            modelCar,
-            direction
-        } =  findData;
-        setState(
-            (prev) => (
-                {
-                    ...prev,
-                    name,
-                    lastName,
-                    brand,
-                    modelCar,
-                    direction
-                }
-            )
-        )
-    }
-
-    const onChangeInput = ({ target }) => {
-        const { name, value } = target;
-        if(name === "customer") onSelectCustomer(value)
-        setState( prev => ({ ...prev, [name]: value }));
-    }
+const TabPersonalData = (props) => {
+    const {
+        state,
+        onChangeInput,
+        arrayCustomers
+    } = props;
 
 
     return (
