@@ -14,12 +14,13 @@ const TableInventory = (props) => {
                         <td> Folio </td>
                         <td> Nombre </td>
                         <td> Existencia </td>
+                        <td> Precio </td>
                         <td> Descripción </td>
-                        <td> Acciones </td>
                     </tr>
                 </thead>
                 <tbody>
                     {
+                        values.length != 0 ?
                         values.map(
                             (val, idx) => (
                                 <tr key={idx}>
@@ -31,11 +32,16 @@ const TableInventory = (props) => {
                                     <td>{val.folio}</td>
                                     <td>{val.names}</td>
                                     <td>{val.amount}</td>
+                                    <td>{val.price}</td>
                                     <td>{val.description}</td>
-                                    <td>{'editar y eliminar'}</td>
                                 </tr>
                             )
-                        )
+                            ) :
+                            <tr key={1} >
+                                <td>
+                                    tabla vacia...
+                                </td>
+                            </tr>
                     }
                 </tbody>
             </table>

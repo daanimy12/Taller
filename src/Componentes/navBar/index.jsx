@@ -60,6 +60,12 @@ const NavBar = (props) => {
                 </label>
             </li>
             <li>
+                <label id="Estadisticas">
+                    <Exit className="iconNavBar" />
+                    Estadisticas
+                </label>
+            </li>
+            <li>
                 <label onClick={salir} >
                     <Exit className="iconNavBar" />
                     Salir

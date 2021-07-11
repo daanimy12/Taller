@@ -7,92 +7,100 @@ import styled from "styled-components";
 import { colorPalette } from "../../system/styles/styles";
 
 
+
 const Inventory = (props) => {
-    const { className } = props;
-    const [state, setState] = useState([]);
+  const { className } = props;
+  const [state, setState] = useState([]);
 
-    const getInvetory = async () => {
-        try {
-            const items = await Universal.ConsultaUniversal('Inventario');
-            const response = items;
-            setState(response)
-        } catch (error) {
-            console.log('error: ', error);
-        }
-
+  const getInvetory = async () => {
+    try {
+      const items = await Universal.ConsultaUniversal('Inventario');
+      const response = items;
+      setState(response)
+    } catch (error) {
+      console.log('error: ', error);
     }
+
+  }
   const onFileChange = async (resp) => {
     const url = await Universal.PushImagen("/HerramientasYRefacciones", resp);
     const response = url;
     return response;
   }
-    //successfully added.. items
-    const addOrEdit = async (values, resetForm) => {
-        try {
-          const copyArr = { ...values };
-          const photo = copyArr.photo;
-          //send data
-          const {
-            amount,
-            description,
-            folio,
-            names,
-            img,
-          } = copyArr;
+  //successfully added.. items
+  const addOrEdit = async (values, resetForm) => {
+    try {
+      const copyArr = { ...values };
+      const photo = copyArr.photo;
+      const {
+        amount,
+        price,
+        description,
+        folio,
+        names,
+        Type,
+        img,
+      } = copyArr;
 
-          const playload = {
-            amount,
-            description,
-            folio,
-            names,
-            img,
-          };
-          const getUrlPhoto = await onFileChange(photo);
-          const url = getUrlPhoto[0];
-          playload.img = url.toString();
-          const newArr = { ...playload };
-          await Universal.PushUniversal("Inventario", newArr)
-          NotificationManager.success("Herramienta o Refacción agregado");
-          // resetForm();
-          await getInvetory();
-        } catch (error) {
-            console.log('error: ', error);
-          NotificationManager.error('Ocurrió un error: Faltan datos');
-        }
-
-    }
-  console.log('state: ', state)
-    useEffect(async () => {
-        try {
-            await getInvetory();
-        } catch (error) {
-            console.log('error: ', error);
-        }
-    }, [])
-
-    const RenderComponents = () => {
-        return (
-            <main>
-                <header> Agregar Herramienta / Refacción </header>
-                <section>
-                    <article>
-                <Form addOrEdit={addOrEdit} />
-                    </article>
-                    <article>
-                        <div className="boxMain">
-                  <TableInventory values={state} />
-                        </div>
-                    </article>
-                </section>
-            </main>
-        )
+      const playload = {
+        amount,
+        price,
+        description,
+        folio,
+        names,
+        Type,
+        img,
+      };
+      const getUrlPhoto = await onFileChange(photo);
+      const url = getUrlPhoto[0];
+      playload.img = url.toString();
+      const newArr = { ...playload };
+      await Universal.PushUniversal("Inventario", newArr)
+      NotificationManager.success("Herramienta o Refacción agregado");
+      resetForm();
+      await getInvetory();
+    } catch (error) {
+      console.log('error: ', error);
+      NotificationManager.error('Ocurrió un error: Faltan datos');
     }
 
+  }
+  const onSideBar = () => {
+    const btnToggle = document.getElementsByClassName('toggle-btn');
+    document.getElementById('sidebar').classList.toggle('active');
+
+  }
+  useEffect(async () => {
+    try {
+      await getInvetory();
+    } catch (error) {
+      console.log('error: ', error);
+    }
+  }, [])
+
+  const RenderComponents = () => {
     return (
-        <div className={className}>
-            {<RenderComponents />}
-        </div>
-    );
+      <main>
+        <header> Agregar Herramienta / Refacción </header>
+        <section>
+          <article>
+              <Form addOrEdit={addOrEdit} />
+          </article>
+          <article>
+            <div className="boxMain">
+              <TableInventory values={state} />
+            </div>
+          </article>
+        </section>
+      </main>
+    )
+  }
+
+  return (
+    <div className={className}>
+      {<RenderComponents />}
+    </div>
+  );
 }
 
 export default styled(Inventory)`
@@ -106,6 +114,16 @@ export default styled(Inventory)`
         font-family: ${colorPalette.fontMain};
         font-size: 24px;
         margin: 10px 0 0 10px;
+      }
+      .typeUser {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        margin: 15px 0;
+        justify-items: center;
+        input {
+          margin-right: 10px;
+        }
       }
       section {
         display: grid;
@@ -165,6 +183,49 @@ export default styled(Inventory)`
               color: ${colorPalette.white};
               letter-spacing: 0.5px;
               padding: 5px 0;
+            }
+            .btn-equi label {
+              font-size: 34px;
+
+            }
+          }
+            .boxAction {
+            margin-top: 10px;
+            display: grid;
+            grid-gap: 10px;
+            grid-template-columns: repeat(3,1fr);
+            .save {
+              border: none;
+              padding: 15px;
+              border-radius: 10px;
+              color: ${colorPalette.white};
+              background-color: ${colorPalette.blue};
+              opacity: 0.8;
+              &:hover {
+                opacity: 1;
+              }
+            }
+            .delete {
+              border: none;
+              padding: 15px;
+              border-radius: 10px;
+              color: ${colorPalette.white};
+              background-color: ${colorPalette.accentColor};
+              opacity: 0.8;
+              &:hover {
+                opacity: 1;
+              }
+            }
+            .cancel {
+              border: none;
+              padding: 15px;
+              border-radius: 10px;
+              color: ${colorPalette.white};
+              background-color: ${colorPalette.secondColor};
+              opacity: 0.8;
+              &:hover {
+                opacity: 1;
+              }
             }
           }
         }
