@@ -5,12 +5,14 @@ import Universal from "../../Helpers/Universal";
 import { NotificationManager } from "react-notifications";
 import styled from "styled-components";
 import { colorPalette } from "../../system/styles/styles";
+import { firebaseDatabase } from '../../system/model/firebase/firebase';
 
 
 
 const Inventory = (props) => {
   const { className } = props;
   const [state, setState] = useState([]);
+  const [stateEdit, setStateEdit] = useState([]);
 
   const getInvetory = async () => {
     try {
@@ -22,12 +24,13 @@ const Inventory = (props) => {
     }
 
   }
+
   const onFileChange = async (resp) => {
     const url = await Universal.PushImagen("/HerramientasYRefacciones", resp);
     const response = url;
     return response;
   }
-  //successfully added.. items
+  //successfully added.. data
   const addOrEdit = async (values, resetForm) => {
     try {
       const copyArr = { ...values };
@@ -65,11 +68,29 @@ const Inventory = (props) => {
     }
 
   }
-  const onSideBar = () => {
-    const btnToggle = document.getElementsByClassName('toggle-btn');
-    document.getElementById('sidebar').classList.toggle('active');
 
+  const editInventory = (item) => {
+    setStateEdit(item)
   }
+
+  const onRemove = async (id, onCancel) => {
+    try {
+      let handleRemove = window.confirm("¿seguro que desea eliminar este elemento?")
+      if (handleRemove) {
+        const itemRef = firebaseDatabase.ref('Inventario').child(id);
+        await itemRef.remove();
+        await getInvetory();
+        NotificationManager.success("Elemento eliminado");
+        onCancel();
+      }
+    } catch (error) {
+      onCancel();
+      console.log('error: ', error);
+      NotificationManager.error("ocurrio un error consulte al administrador");
+    }
+    onCancel();
+  }
+
   useEffect(async () => {
     try {
       await getInvetory();
@@ -84,11 +105,11 @@ const Inventory = (props) => {
         <header> Agregar Herramienta / Refacción </header>
         <section>
           <article>
-              <Form addOrEdit={addOrEdit} />
+            <Form addOrEdit={addOrEdit} inventoryEdit={stateEdit} onRemove={onRemove} />
           </article>
           <article>
             <div className="boxMain">
-              <TableInventory values={state} />
+              <TableInventory values={state} editInventory={editInventory} />
             </div>
           </article>
         </section>

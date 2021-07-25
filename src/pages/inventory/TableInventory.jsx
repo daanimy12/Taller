@@ -2,9 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 const TableInventory = (props) => {
-    const { className, values } = props;
+    const { className, values, editInventory } = props;
     
-
     return (
         <div className={className} >
             <table className="table users table-hover">
@@ -23,7 +22,7 @@ const TableInventory = (props) => {
                         values.length != 0 ?
                         values.map(
                             (val, idx) => (
-                                <tr key={idx}>
+                                <tr onClick={(e) => editInventory(val)} key={idx}>
                                     <td>
                                         {
                                             val.img != null ? <img src={val.img} alt="photo" style={{ width: 145, height: 105 }} /> : null

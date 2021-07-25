@@ -4,6 +4,7 @@ import { colorPalette } from "../../system/styles/styles";
 import { NotificationManager } from "react-notifications";
 
 const inicialValuesF = {
+  Key: '',
   folio: '',
   names: '',
   amount: 0,
@@ -11,12 +12,11 @@ const inicialValuesF = {
   description: '',
   photo: null,
   img: null,
-  photoP: null,
   Type: 'herramienta',
 }
 
 const Form = (props) => {
-  const { inventoryEdit, addOrEdit } = props;
+  const { inventoryEdit, addOrEdit, onRemove } = props;
   const [state, setState] = useState(inicialValuesF);
 
   const onChangeInput = ({ target }) => {
@@ -30,10 +30,12 @@ const Form = (props) => {
 
   const resetForm = () => {
     setState({ ...inicialValuesF });
-  }
-  const cancel = () => {
+  };
+
+  const onCancel = () => {
     resetForm();
-  }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     addOrEdit(state, resetForm);
@@ -47,7 +49,7 @@ const Form = (props) => {
         if (reader.readyState === 2) {
           setState(prev => ({
             ...prev,
-            photoP: reader.result,
+            // photoP: reader.result, view Img preload.
             photo,
           }));
         }
@@ -58,11 +60,25 @@ const Form = (props) => {
     }
   };
 
-  useEffect(() => {
+  useEffect(() => {   
     if (inventoryEdit != null) {
-      setState({
-        ...inventoryEdit,
-      });
+      const { Key, folio, names, amount, price, description, Type, img } = inventoryEdit;
+      let playload = {
+        Key,
+        folio,
+        names,
+        amount,
+        price,
+        description,
+        Type,
+        img,
+      };
+
+      if (folio != null && names != null && amount != null && price != null && description != null && Type != null && img != null && Key != null) {
+        setState({
+          ...playload,
+        });
+      }
     }
   }, [inventoryEdit])
 
@@ -156,7 +172,7 @@ const Form = (props) => {
       </div>
       <div className="boxInput" >
         {
-          <img src={state.photoP} alt="Imagen" id="myimg" style={{ width: 300, height: 185 }} />
+          <img src={state.img} alt="Imagen" id="myimg" style={{ width: 300, height: 185 }} />
         }
       </div>
       <div className="boxAction">
@@ -168,14 +184,14 @@ const Form = (props) => {
         </button>
         <button
           type="button"
-          // onClick={deleteUser}
+          onClick={(e) => onRemove(state.Key, onCancel)}
           className="delete"
         >
-          Desactivar
+          Eliminar
         </button>
         <button
           type="button"
-          onClick={cancel}
+          onClick={onCancel}
           className="cancel">
           Cancelar
         </button>
