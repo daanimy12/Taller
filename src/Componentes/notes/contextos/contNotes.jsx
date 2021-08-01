@@ -88,7 +88,8 @@ const NotesState = (props) => {
     }
     const loadData = async  () => {
         const items = await Universal.ConsultaUniversal('Inventario');
-        setInventary(items)
+        setInventary(items);
+        onClear()
     }
 
     React.useEffect(
@@ -104,17 +105,32 @@ const NotesState = (props) => {
         if(value < 0) {
             NotificationManager.error("No se aceptan datos negativos")
         }else {
-            console.log(id);
             const inventaryLocal = inventary.map((inventa,idx) => ( { ...inventa, idx } ) )
-            console.log(inventaryLocal)
             const findArray = inventaryLocal.find( (inve) => inve.Key === id );
             const filterArray = inventaryLocal.filter( (inve) => inve.Key !== id );
             findArray.count = value;
+            const arrayFinish = [
+                ...filterArray,
+                findArray
+            ];
             setInventary(
-                [
-                    ...filterArray,
-                    findArray
-                ].sort((a,b) => a.idx - b.idx)
+                arrayFinish.sort((a,b) => a.idx - b.idx)
+            );
+            // variable total
+            let totalPrice = 0;
+            arrayFinish?.filter((inv) => inv.count > 0)?.forEach(
+                (arr) => {
+                    totalPrice += (+arr?.price * arr?.count);
+                }
+            );
+            // console.log(totalPrice);
+            setState(
+                prev => (
+                    {
+                        ...prev,
+                        total: totalPrice
+                    }
+                )
             )
         }
     }

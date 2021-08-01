@@ -68,6 +68,7 @@ const TabsNotes = (props) => {
                 >
                     <Tab label="Datos Personales" {...a11yProps(0)} />
                     <Tab label="Detalles de la Nota" {...a11yProps(1)} />
+                    <Tab label="Datos de Provedores" {...a11yProps(2)} />
                 </Tabs>
             </AppBar>
             <SwipeableViews
@@ -86,6 +87,9 @@ const TabsNotes = (props) => {
                 </TabPanel>
                 <TabPanel index={1} value={countStep}>
                     <TabDetails  data={stateLocal} />
+                </TabPanel>
+                <TabPanel index={2} value={countStep}>
+                    <h1>aqui va lo demas</h1>
                 </TabPanel>
             </SwipeableViews>
         </MainTabNotes>

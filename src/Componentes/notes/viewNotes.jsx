@@ -135,7 +135,7 @@ const ViewNotes = () => {
                                 <>
                                     <h2> {inven?.count || 0} </h2>
                                     <label> {inven.names} </label>
-                                    <h1> {inven?.count || 0} </h1>
+                                    <h1> {inven?.price || 0} </h1>
                                 </>
                             )
                         )
@@ -148,7 +148,7 @@ const ViewNotes = () => {
                 <label
                     className="TotalInput"
                 >
-                    {stateLocal.total}
+                    {stateLocal.total.toFixed(2)}
                 </label>
             </div>
         </ContainerView>

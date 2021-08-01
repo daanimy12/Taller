@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {firebaseDatabase} from '../Conexion/fire';
 import {createBrowserHistory as createHistory} from 'history';
 import Alert from 'react-s-alert';
-import '../css/Loggin.css';
+import '../system/styles/css/Loggin.css';
 import HelpersLogin from '../Helpers/Login';
 
 const history = new createHistory();

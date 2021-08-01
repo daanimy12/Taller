@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Alert from 'react-s-alert';
 import Select from "react-select";
-import '../../css/Usuario.css';
+import '../../system/styles/css/Usuario.css';
 import Preload from '../Preload';
 import PreloadC from '../../Componentes/PreloadCarga';
 import Universal from "../../Helpers/Universal";

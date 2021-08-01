@@ -11,9 +11,9 @@ import Index from './Header';
 import Codigos from '../Componentes/Codigos';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Login from '../Helpers/Login';
-import '../css/Principal.css';
-import '../css/Menu.css';
-import '../css/Exportar.css';
+import '../system/styles/css/Principal.css';
+import '../system/styles/css/Menu.css';
+import '../system/styles/css/Exportar.css';
 import Error from "./Error";
 import Cliente from  '../Componentes/Clientes';
 import Cierre_de_Caja from '../Componentes/Cierre'
