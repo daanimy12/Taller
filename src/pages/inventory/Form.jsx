@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 import { colorPalette } from "../../system/styles/styles";
-
+import { NotificationManager } from "react-notifications";
 
 const inicialValuesF = {
+  Key: '',
   folio: '',
   names: '',
   amount: 0,
+  price: 0,
   description: '',
   photo: null,
-  img: null,
-  photoP: null,
+  Type: 'herramienta',
 }
 
 const Form = (props) => {
-  const { inventoryEdit, addOrEdit } = props;
+  const { inventoryEdit, addOrEdit, onRemove } = props;
   const [state, setState] = useState(inicialValuesF);
 
   const onChangeInput = ({ target }) => {
@@ -28,7 +29,11 @@ const Form = (props) => {
 
   const resetForm = () => {
     setState({ ...inicialValuesF });
-  }
+  };
+
+  const onCancel = () => {
+    resetForm();
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,29 +43,47 @@ const Form = (props) => {
   const imageHandler = (e) => {
     const reader = new FileReader();
     const photo = e.target.files[0];
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        setState(prev => ({
-          ...prev,
-          photoP: reader.result,
-          photo,
-        }));
-      }
-    };
-    reader.readAsDataURL(e.target.files[0])
+    try {
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          setState(prev => ({
+            ...prev,
+            // photoP: reader.result, view Img preload.
+            photo,
+          }));
+        }
+      };
+      reader.readAsDataURL(e.target.files[0])
+    } catch (error) {
+      NotificationManager.error('Ocurrió un error: Faltan datos');
+    }
   };
 
-  useEffect(() => {
+  useEffect(() => {   
     if (inventoryEdit != null) {
-      setState({
-        ...inventoryEdit,
-      });
+      const { Key, folio, names, amount, price, description, Type, img } = inventoryEdit;
+      let playload = {
+        Key,
+        folio,
+        names,
+        amount,
+        price,
+        description,
+        Type,
+        img,
+      };
+
+      if (folio != null && names != null && amount != null && price != null && description != null && Type != null && img != null && Key != null) {
+        setState({
+          ...playload,
+        });
+      }
     }
   }, [inventoryEdit])
 
   return (
     <form className="boxMain" onSubmit={handleSubmit}>
-      <h2> Datos </h2>
+      <h2> Datos herramienta / refacción </h2>
       <div className="boxInput" >
         <label> Folio: </label>
         <input
@@ -68,7 +91,7 @@ const Form = (props) => {
           value={state.folio}
           onChange={onChangeInput}
           required
-          // readOnly
+        // readOnly
         />
       </div>
       <div className="boxInput" >
@@ -92,6 +115,17 @@ const Form = (props) => {
         />
       </div>
       <div className="boxInput" >
+        <label> Precio: </label>
+        <input
+          type="number"
+          min="0"
+          name="price"
+          value={state.price}
+          onChange={onChangeInput}
+          required
+        />
+      </div>
+      <div className="boxInput" >
         <label> Descripción: </label>
         <input
           name="description"
@@ -99,6 +133,30 @@ const Form = (props) => {
           onChange={onChangeInput}
           required
         />
+      </div>
+      <div className="typeUser" >
+        <div>
+          <input
+            type="radio"
+            id="customRadio1"
+            name='Type'
+            checked={state.Type === 'herramienta'}
+            onChange={onChangeInput}
+            value="herramienta"
+          />
+          <label htmlFor="customRadio1"> Herramienta </label>
+        </div>
+        <div>
+          <input
+            type="radio"
+            id="customRadio2"
+            name='Type'
+            checked={state.Type === 'refaccion'}
+            onChange={onChangeInput}
+            value="refaccion"
+          />
+          <label htmlFor="customRadio2"> Refacción </label>
+        </div>
       </div>
       <div className="boxInput" >
         <label> Imagen: </label>
@@ -111,15 +169,27 @@ const Form = (props) => {
           required
         />
       </div>
-      <br />
-      <div className="boxInput" >
-        {
-          state.photoP != null ?
-            <img src={""} alt="photo" id="myimg" style={{ width: 328, height: 285 }} /> :
-            <progress></progress>
-        }
+      <div className="boxAction">
+        <button
+          type="submit"
+          className="save"
+        >
+          Aceptar
+        </button>
+        <button
+          type="button"
+          onClick={(e) => onRemove(state.Key, onCancel)}
+          className="delete"
+        >
+          Eliminar
+        </button>
+        <button
+          type="button"
+          onClick={onCancel}
+          className="cancel">
+          Cancelar
+        </button>
       </div>
-      <button type="submit"> Aceptar </button>
     </form>
   )
 };
@@ -127,77 +197,6 @@ const Form = (props) => {
 
 export default styled(Form)`
     main {
-      width: calc(100vw - 300px);
-      height: 100vh;
-      display: flex;
-      gap: 10px;
-      flex-direction: column;
-      header {
-        font-family: ${colorPalette.fontMain};
-        font-size: 24px;
-        margin: 10px 0 0 10px;
-      }
-      section {
-        display: grid;
-        grid-template-columns: 40% 60%;
-        width: 100%;
-        height: 100%;
-        .boxMain {
-          background-color: ${colorPalette.white};
-          width: 90%;
-          height: 85%;
-          overflow: auto;
-          border-radius: 10px;
-          margin: auto;
-          padding: 30px;
-          box-shadow: ${colorPalette.boxShadowLigth};
-          display: flex;
-          flex-direction: column;
-          gap: 15px;
-        }
-        article {
-          height: 100%;
-          padding: 10px;
-          display: flex;
-          form {
-            h2 {
-              font-family: ${colorPalette.fontMain};
-              font-size: 20px;
-              text-transform: uppercase;
-            }
-            .boxInput {
-              display: flex;
-              justify-items: center;
-              align-items: center;
-              gap: 15px;
-              label {
-                font-family: ${colorPalette.fontMain};
-                font-size: 18px;
-                font-weight: 400;
-              }
-              
-              input {
-                margin-left: 10px;
-                width: calc(100% - 10px);
-                border-top: none;
-                border-left: none;
-                border-right: none;
-                border-bottom: solid 1px ${colorPalette.secondColor};
-                &:focus {
-                  outline: none;
-                }
-              }
-              
-            }
-            button {
-              background-color: ${colorPalette.secondColor};
-              border-radius: 10px;
-              color: ${colorPalette.white};
-              letter-spacing: 0.5px;
-              padding: 5px 0;
-            }
-          }
-        }
-      }
+      
     }
 `;

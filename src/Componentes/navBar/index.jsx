@@ -1,31 +1,25 @@
 import React from 'react';
 import styled from "styled-components";
-import { Users, CashRegister } from "@styled-icons/fa-solid";
-import { CustomerService2 } from "@styled-icons/remix-line";
-import { Inventory } from "@styled-icons/material-outlined";
-import { Settings } from "@styled-icons/fluentui-system-filled";
-import { Offer, Report, Exit } from "@styled-icons/boxicons-solid";
-import { BurstSale } from "@styled-icons/foundation";
-import { Table } from "@styled-icons/boxicons-regular";
 import Login from '../../Helpers/Login';
 import { useHistory } from "react-router-dom";
 import {colorPalette} from "../../system/styles/styles";
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import BarChartIcon from '@material-ui/icons/BarChart';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
+import ContactsIcon from '@material-ui/icons/Contacts';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import ListAltIcon from '@material-ui/icons/ListAlt';
 
 const NavBar = (props) => {
-    const [state, setState] = React.useState(
-        {
-            Areas: [],
-            listaFinal: null,
-            Stilo: 'ulInicial',
-            Clase1: 'none',
-            Clase2: 'none',
-            Clase3: 'none'
-        });
-    const { Cliente, className } = props;
+
+    const { Cliente } = props;
     const history = useHistory();
 
-    const cambio = (e) => {
-        history.push('/Customers/'+[e.target.id]);
+    const cambio = (value) => {
+        history.push('/Customers/'+[value]);
     };
     const salir = () => {
         // Eliminacion de token //
@@ -34,59 +28,50 @@ const NavBar = (props) => {
     };
 
     const Menu =  (Cliente === "Administrador") ?
-        <ul className={state.Stilo}>
-            <li>
-                <label id='Clientes' onClick={cambio}>
-                    <CustomerService2 className="iconNavBar" />
-                    Directorio
-                </label>
-            </li>
-            <li>
-                <label id='Usuarios' onClick={cambio}>
-                    <Users className="iconNavBar" />
-                    Usuarios
-                </label>
-            </li>
-            <li>
-                <label id='Notas' onClick={cambio}>
-                    <Inventory className="iconNavBar" />
-                    Notas
-                </label>
-            </li>
-            <li>
-                <label id='Inventario' onClick={cambio}>
-                    <Settings className="iconNavBar" />
-                    Inventario
-                </label>
-            </li>
-            <li>
-                <label onClick={salir} >
-                    <Exit className="iconNavBar" />
-                    Salir
-                </label>
-            </li>
-        </ul> :
-        <ul className={state.Stilo}>
-            <li>
-                <label id='Inventario/AgregarProduc' onClick={cambio}>
-                    Inventario
-                </label>
-            </li>
-            <li>
-                <label onClick={salir} >
-                    Salir
-                </label>
-            </li>
-        </ul>;
+        <div>
+            <ListItem button onClick={() => cambio("Clientes")}>
+                <ListItemIcon>
+                    <ContactsIcon />
+                </ListItemIcon>
+                <ListItemText primary="Directorio" />
+            </ListItem>
+            <ListItem button onClick={() => cambio('Usuarios')}>
+                <ListItemIcon>
+                    <PersonAddIcon id='Usuarios' />
+                </ListItemIcon>
+                <ListItemText id='Usuarios' primary="Usuarios" />
+            </ListItem>
+            <ListItem button onClick={() => cambio('Notas')}>
+                <ListItemIcon>
+                    <ListAltIcon id='Notas' />
+                </ListItemIcon>
+                <ListItemText id='Notas' primary="Notas" />
+            </ListItem>
+            <ListItem button onClick={()=> cambio('Inventario')}>
+                <ListItemIcon>
+                    <AssignmentTurnedInIcon id='Inventario' />
+                </ListItemIcon>
+                <ListItemText id='Inventario' primary="Inventarios" />
+            </ListItem>
+            <ListItem button onClick={()=>cambio('Estadisticas')}>
+                <ListItemIcon>
+                    <BarChartIcon id="Estadisticas" />
+                </ListItemIcon>
+                <ListItemText id="Estadisticas" primary="Estadisticas" />
+            </ListItem>
+            <ListItem button onClick={salir}>
+                <ListItemIcon>
+                    <ExitToAppIcon />
+                </ListItemIcon>
+                <ListItemText primary="Salir" />
+            </ListItem>
+        </div>
+        :
+        null;
     return (
-        <main className={className}>
-            <nav
-                id="menu"
-            >
-                <img src="https://i.pinimg.com/originals/97/95/eb/9795ebef9b85576509c37dfce0c8aed8.jpg"  alt="Logo de la company" />
-                {Menu}
-            </nav>
-        </main>
+        <div>
+            {Menu}
+        </div>
     );
 }
 

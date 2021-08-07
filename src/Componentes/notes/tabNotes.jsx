@@ -7,9 +7,8 @@ import { useTheme } from '@material-ui/core/styles';
 import SwipeableViews from 'react-swipeable-views';
 import TabPersonalData from "./tabPersonalData";
 import TabDetails from "./tabDetails";
-import moment from "moment";
-import Universal from "../../Helpers/Universal";
 import {useNotesAction} from "./contextos/contNotes";
+import TabVendors from "./tabVendors";
 
 const MainTabNotes = styled.main`
   width: 100%;
@@ -68,6 +67,7 @@ const TabsNotes = (props) => {
                 >
                     <Tab label="Datos Personales" {...a11yProps(0)} />
                     <Tab label="Detalles de la Nota" {...a11yProps(1)} />
+                    <Tab label="Datos de Provedores" {...a11yProps(2)} />
                 </Tabs>
             </AppBar>
             <SwipeableViews
@@ -86,6 +86,9 @@ const TabsNotes = (props) => {
                 </TabPanel>
                 <TabPanel index={1} value={countStep}>
                     <TabDetails  data={stateLocal} />
+                </TabPanel>
+                <TabPanel index={2} value={countStep}>
+                    <TabVendors />
                 </TabPanel>
             </SwipeableViews>
         </MainTabNotes>

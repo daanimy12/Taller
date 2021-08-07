@@ -2,6 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { colorPalette } from "../../system/styles/styles";
 import {useNotesAction} from "./contextos/contNotes";
+import { DownloadForOffline } from 'styled-icons/material';
+import { jsPDF } from "jspdf";
+import LogoMain from "./imgPDF/logoSA.jpeg";
 
 const ContainerView = styled.main`
   display: flex;
@@ -12,6 +15,7 @@ const ContainerView = styled.main`
   border-radius: 10px;
   height: 100%;
   overflow: auto;
+  position: relative;
   img {
     width: 50%;
     object-position: center;
@@ -54,6 +58,8 @@ const ContainerView = styled.main`
     grid-gap: 5px;
     align-content: center;
     padding: 10px;
+    max-height: 300px;
+    overflow: auto;
     label, h1, h2 {
       font-family: ${colorPalette.fontMain};
       font-size: 16px;
@@ -93,15 +99,109 @@ const ContainerView = styled.main`
       }
     }
   }
+  .titleVendor {
+    font-size: 18px;
+  }
+  .icon {
+    width: 30px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    cursor: pointer;
+  }
 `;
+const imgLogo = `https://firebasestorage.googleapis.com/v0/b/tallerdaniel-7fa3d.appspot.com/o/imgGeneral%2FWhatsApp%20Image%202021-06-20%20at%2020.29.20.jpeg?alt=media&token=2fca255c-52a7-4d0c-879e-0d36549cefc7`;
 
 const ViewNotes = () => {
-    const { stateLocal, inventary } = useNotesAction();
+    const { stateLocal, inventary, arrayVendors, validGeneralLocal } = useNotesAction();
+
+    const createHeaders = (keys) => {
+        const result = [];
+        for (let i = 0; i < keys.length; i += 1) {
+            result.push({
+                id: keys[i],
+                name: keys[i],
+                prompt: keys[i],
+                width: 65,
+                align: "center",
+                padding: 0
+            });
+        }
+        return result;
+    }
+
+    const getData = (arrayInventary) => {
+        const resultArray = [];
+        arrayInventary?.filter((inv) => inv.count > 0)?.map(
+            invent => {
+                resultArray.push(
+                    {
+                        Cantidad: invent?.count ,
+                        Nombre: invent?.names ,
+                        Total: invent?.price ,
+
+                    }
+                )
+                return null;
+            }
+        );
+        return resultArray;
+    }
+    const onDownload = () => {
+        if(validGeneralLocal()) {
+            // Default export is a4 paper, portrait, using millimeters for units
+            const doc = new jsPDF();
+            // Margen del doc
+            doc.line(10,10,200,10);
+            doc.line(10,10,10,287);
+            doc.line(10,287,200,287);
+            doc.line(200,10,200,287);
+            // Fin del margen doc
+            // Control de Img
+            doc.addImage(LogoMain, "JPEG", 40, 15, 120, 20);
+            doc.setFontSize(12);
+            doc.text(`Folio: ${stateLocal?.folio}`,150,40, {
+                maxWidth: 195
+            });
+            // Fin Img
+            // Control de datos del cliente
+            doc.line(10,43,200,43);
+            doc.setFontSize(14);
+            doc.text(`Nombre: ${stateLocal?.name} ${stateLocal?.lastName}`,15,50, {
+                maxWidth: 95
+            });
+            doc.text(`Dirección: ${stateLocal?.direction}`,15,60, {
+                maxWidth: 95
+            });
+            doc.text(`Fecha: ${stateLocal?.createdAt}`,15,70, {
+                maxWidth: 95
+            });
+            doc.text(`Modelo: ${stateLocal?.modelCar}`,115,50, {
+                maxWidth: 195
+            });
+            doc.text(`Marca: ${stateLocal?.brand}`,115,60, {
+                maxWidth: 195
+            });
+            doc.text(`Placa: ${stateLocal?.licensePlate}`,115,70, {
+                maxWidth: 195
+            });
+            doc.line(10,80,200,80);
+            doc.setFontSize(16);
+            doc.setFont("Arial","italic","bold")
+            doc.text(`Total: $${stateLocal.total.toFixed(2)}`,145,79, {
+                maxWidth: 195
+            });
+            // Fin de control de datos de clientes
+            doc.table(15,90,getData(inventary),createHeaders(["Cantidad","Nombre","Total"]),{ padding: "5px",autoSize: false, fontSize: 14 })
+            doc.save("a4.pdf");
+        }
+    }
     return (
         <ContainerView>
+            <DownloadForOffline className='icon' onClick={onDownload} />
             <img
                 alt="logo"
-                src="https://firebasestorage.googleapis.com/v0/b/tallerdaniel-7fa3d.appspot.com/o/imgGeneral%2FWhatsApp%20Image%202021-06-20%20at%2020.29.20.jpeg?alt=media&token=2fca255c-52a7-4d0c-879e-0d36549cefc7"
+                src={imgLogo}
             />
             <div className="dataGeneral">
                 <div className="bxTwo" >
@@ -135,12 +235,13 @@ const ViewNotes = () => {
                                 <>
                                     <h2> {inven?.count || 0} </h2>
                                     <label> {inven.names} </label>
-                                    <h1> {inven?.count || 0} </h1>
+                                    <h1> {inven?.price || 0} </h1>
                                 </>
                             )
                         )
                 }
             </div>
+
             <div className="boxInput">
                 <label>
                     Total:
@@ -148,8 +249,29 @@ const ViewNotes = () => {
                 <label
                     className="TotalInput"
                 >
-                    {stateLocal.total}
+                    {stateLocal.total.toFixed(2)}
                 </label>
+            </div>
+            <hr/>
+            <h1 className="titleVendor"> Provedores </h1>
+            <div className="boxInventary" >
+                <label> Folio </label>
+                <label> Marca </label>
+                <label> Monto </label>
+            </div>
+            <div className="boxInventary" >
+                {
+                    arrayVendors
+                        .map(
+                            (inven) => (
+                                <>
+                                    <h2> {inven?.folio || 0} </h2>
+                                    <label> {inven.name} </label>
+                                    <h1> {inven?.invoiceAmount || 0} </h1>
+                                </>
+                            )
+                        )
+                }
             </div>
         </ContainerView>
     )

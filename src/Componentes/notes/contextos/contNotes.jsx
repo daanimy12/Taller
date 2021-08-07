@@ -10,6 +10,8 @@ const NotesState = (props) => {
     const [ inventary, setInventary ] = React.useState(
         []
     );
+    // array de los datos de provedores de la nota
+    const [arrayVendors, setArrayVendors] = React.useState([]);
     const [stateLocal,setState] = React.useState(
         {
             folio: "",
@@ -88,7 +90,7 @@ const NotesState = (props) => {
     }
     const loadData = async  () => {
         const items = await Universal.ConsultaUniversal('Inventario');
-        setInventary(items)
+        setInventary(items);
     }
 
     React.useEffect(
@@ -104,31 +106,72 @@ const NotesState = (props) => {
         if(value < 0) {
             NotificationManager.error("No se aceptan datos negativos")
         }else {
-            console.log(id);
             const inventaryLocal = inventary.map((inventa,idx) => ( { ...inventa, idx } ) )
-            console.log(inventaryLocal)
             const findArray = inventaryLocal.find( (inve) => inve.Key === id );
             const filterArray = inventaryLocal.filter( (inve) => inve.Key !== id );
             findArray.count = value;
+            const arrayFinish = [
+                ...filterArray,
+                findArray
+            ];
             setInventary(
-                [
-                    ...filterArray,
-                    findArray
-                ].sort((a,b) => a.idx - b.idx)
+                arrayFinish.sort((a,b) => a.idx - b.idx)
+            );
+            // variable total
+            let totalPrice = 0;
+            arrayFinish?.filter((inv) => inv.count > 0)?.forEach(
+                (arr) => {
+                    totalPrice += (+arr?.price * arr?.count);
+                }
+            );
+            // console.log(totalPrice);
+            setState(
+                prev => (
+                    {
+                        ...prev,
+                        total: totalPrice
+                    }
+                )
             )
         }
+    }
+
+    const isEmpetyState = (value, comp = '') => {
+        return value !== comp;
+    }
+    const validGeneralLocal =()=>{
+        const {
+            folio,
+            name,
+            direction,
+            modelCar,
+            brand,
+            licensePlate,
+            lastName,
+        } = stateLocal;
+        return isEmpetyState(folio)
+            && isEmpetyState(name)
+            && isEmpetyState(direction)
+            && isEmpetyState(modelCar)
+            && isEmpetyState(brand)
+            && isEmpetyState(licensePlate)
+            && isEmpetyState(lastName);
+
     }
 
     const value = {
         inventary,
         stateLocal,
         arrayCustomers,
+        arrayVendors,
         onClear,
         onFolio,
         loadCustomers,
         onChangeInput,
         onSelectCustomer,
-        onChangeInputSelect
+        onChangeInputSelect,
+        setArrayVendors,
+        validGeneralLocal
     }
     return (
         <NotesContext.Provider
