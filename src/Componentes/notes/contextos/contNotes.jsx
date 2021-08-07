@@ -10,6 +10,8 @@ const NotesState = (props) => {
     const [ inventary, setInventary ] = React.useState(
         []
     );
+    // array de los datos de provedores de la nota
+    const [arrayVendors, setArrayVendors] = React.useState([]);
     const [stateLocal,setState] = React.useState(
         {
             folio: "",
@@ -89,7 +91,6 @@ const NotesState = (props) => {
     const loadData = async  () => {
         const items = await Universal.ConsultaUniversal('Inventario');
         setInventary(items);
-        onClear()
     }
 
     React.useEffect(
@@ -135,16 +136,42 @@ const NotesState = (props) => {
         }
     }
 
+    const isEmpetyState = (value, comp = '') => {
+        return value !== comp;
+    }
+    const validGeneralLocal =()=>{
+        const {
+            folio,
+            name,
+            direction,
+            modelCar,
+            brand,
+            licensePlate,
+            lastName,
+        } = stateLocal;
+        return isEmpetyState(folio)
+            && isEmpetyState(name)
+            && isEmpetyState(direction)
+            && isEmpetyState(modelCar)
+            && isEmpetyState(brand)
+            && isEmpetyState(licensePlate)
+            && isEmpetyState(lastName);
+
+    }
+
     const value = {
         inventary,
         stateLocal,
         arrayCustomers,
+        arrayVendors,
         onClear,
         onFolio,
         loadCustomers,
         onChangeInput,
         onSelectCustomer,
-        onChangeInputSelect
+        onChangeInputSelect,
+        setArrayVendors,
+        validGeneralLocal
     }
     return (
         <NotesContext.Provider

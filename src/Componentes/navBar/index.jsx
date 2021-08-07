@@ -14,20 +14,12 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 
 const NavBar = (props) => {
-    const [state, setState] = React.useState(
-        {
-            Areas: [],
-            listaFinal: null,
-            Stilo: 'ulInicial',
-            Clase1: 'none',
-            Clase2: 'none',
-            Clase3: 'none'
-        });
-    const { Cliente, className } = props;
+
+    const { Cliente } = props;
     const history = useHistory();
 
-    const cambio = (e) => {
-        history.push('/Customers/'+[e.target.id]);
+    const cambio = (value) => {
+        history.push('/Customers/'+[value]);
     };
     const salir = () => {
         // Eliminacion de token //
@@ -37,31 +29,31 @@ const NavBar = (props) => {
 
     const Menu =  (Cliente === "Administrador") ?
         <div>
-            <ListItem button onClick={cambio}>
+            <ListItem button onClick={() => cambio("Clientes")}>
                 <ListItemIcon>
-                    <ContactsIcon id='Clientes' />
+                    <ContactsIcon />
                 </ListItemIcon>
-                <ListItemText id='Clientes' primary="Directorio" />
+                <ListItemText primary="Directorio" />
             </ListItem>
-            <ListItem button onClick={cambio}>
+            <ListItem button onClick={() => cambio('Usuarios')}>
                 <ListItemIcon>
                     <PersonAddIcon id='Usuarios' />
                 </ListItemIcon>
                 <ListItemText id='Usuarios' primary="Usuarios" />
             </ListItem>
-            <ListItem button onClick={cambio}>
+            <ListItem button onClick={() => cambio('Notas')}>
                 <ListItemIcon>
                     <ListAltIcon id='Notas' />
                 </ListItemIcon>
                 <ListItemText id='Notas' primary="Notas" />
             </ListItem>
-            <ListItem button onClick={cambio}>
+            <ListItem button onClick={()=> cambio('Inventario')}>
                 <ListItemIcon>
                     <AssignmentTurnedInIcon id='Inventario' />
                 </ListItemIcon>
                 <ListItemText id='Inventario' primary="Inventarios" />
             </ListItem>
-            <ListItem button onClick={cambio}>
+            <ListItem button onClick={()=>cambio('Estadisticas')}>
                 <ListItemIcon>
                     <BarChartIcon id="Estadisticas" />
                 </ListItemIcon>
@@ -75,18 +67,7 @@ const NavBar = (props) => {
             </ListItem>
         </div>
         :
-        <ul className={state.Stilo}>
-            <li>
-                <label id='Inventario/AgregarProduc' onClick={cambio}>
-                    Inventario
-                </label>
-            </li>
-            <li>
-                <label onClick={salir} >
-                    Salir
-                </label>
-            </li>
-        </ul>;
+        null;
     return (
         <div>
             {Menu}
