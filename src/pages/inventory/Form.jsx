@@ -11,7 +11,6 @@ const inicialValuesF = {
   price: 0,
   description: '',
   photo: null,
-  img: null,
   Type: 'herramienta',
 }
 
@@ -169,11 +168,6 @@ const Form = (props) => {
           type="file"
           required
         />
-      </div>
-      <div className="boxInput" >
-        {
-          <img src={state.img} alt="Imagen" id="myimg" style={{ width: 300, height: 185 }} />
-        }
       </div>
       <div className="boxAction">
         <button

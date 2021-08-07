@@ -5,8 +5,42 @@ import Alert from 'react-s-alert';
 import { colorPalette } from  "../../system/styles/styles"
 import HelperLogin from '../../Helpers/Login';
 import {NotificationManager} from "react-notifications";
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
+const useStyles = makeStyles((theme) => ({
+    paper: {
+        marginTop: theme.spacing(5),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
+    root: {
+        marginTop: theme.spacing(8),
+        maxWidth: 345,
+    },
+    avatar: {
+        margin: theme.spacing(1),
+        backgroundColor: theme.palette.primary.main,
+    },
+    form: {
+        width: '100%', // Fix IE 11 issue.
+        marginTop: theme.spacing(1),
+    },
+    submit: {
+        margin: theme.spacing(3, 0, 2),
+    },
+}));
 const Loggin = (props) => {
+    const classes = useStyles();
     const formRef = React.useRef();
     const { className } = props;
     const [state,setState] = React.useState({
@@ -108,18 +142,60 @@ const Loggin = (props) => {
 
 
     return (
-        <div className={className}>
-            <form id="form" ref={formRef} >
-                <img src="https://i.pinimg.com/originals/97/95/eb/9795ebef9b85576509c37dfce0c8aed8.jpg" alt="logo"/>
-                <label id="label" htmlFor="email">Usuario:</label>
-                <input type="email" id="email" onChange={updatestate} value={state.email}/>
-                <label id="label" htmlFor="password">Password:</label>
-                <input type="password" id="password" onKeyPress={onKeyPress}
-                       value={state.password}
-                       onChange={updatestate}/>
-                <button type="button" onClick={validar}> Aceptar </button>
-            </form>
-        </div>
+        <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <Card className={classes.root} elevation={5}>
+                <CardContent>
+                    <div className={classes.paper} >
+                        <Avatar className={classes.avatar}>
+                            <LockOutlinedIcon />
+                        </Avatar>
+                        <Typography component="h1" variant="h5">
+                            Sánchez Automotriz
+                        </Typography>
+                        <form className={classes.form} id="form" ref={formRef}>
+                            <TextField
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                fullWidth
+                                id="email"
+                                label="Email Address"
+                                name="email"
+                                autoComplete="email"
+                                autoFocus
+                                onChange={updatestate}
+                                value={state.email}
+                            />
+                            <TextField
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                fullWidth
+                                name="password"
+                                label="Password"
+                                type="password"
+                                id="password"
+                                autoComplete="current-password"
+                                onKeyPress={onKeyPress}
+                        value={state.password}
+                                onChange={updatestate}
+                            />
+                            <Button
+                                type="button"
+                                fullWidth
+                                variant="contained"
+                                color="primary"
+                                className={classes.submit}
+                                onClick={validar}
+                            >
+                                Iniciar sesión
+                        </Button>
+                    </form>
+                    </div>
+                </CardContent>
+            </Card>
+        </Container>
     );
 
 }

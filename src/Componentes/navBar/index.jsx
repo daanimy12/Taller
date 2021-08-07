@@ -1,15 +1,17 @@
 import React from 'react';
 import styled from "styled-components";
-import { Users, CashRegister } from "@styled-icons/fa-solid";
-import { CustomerService2 } from "@styled-icons/remix-line";
-import { Inventory } from "@styled-icons/material-outlined";
-import { Settings } from "@styled-icons/fluentui-system-filled";
-import { Offer, Report, Exit } from "@styled-icons/boxicons-solid";
-import { BurstSale } from "@styled-icons/foundation";
-import { Table } from "@styled-icons/boxicons-regular";
 import Login from '../../Helpers/Login';
 import { useHistory } from "react-router-dom";
 import {colorPalette} from "../../system/styles/styles";
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import BarChartIcon from '@material-ui/icons/BarChart';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
+import ContactsIcon from '@material-ui/icons/Contacts';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import ListAltIcon from '@material-ui/icons/ListAlt';
 
 const NavBar = (props) => {
     const [state, setState] = React.useState(
@@ -34,44 +36,45 @@ const NavBar = (props) => {
     };
 
     const Menu =  (Cliente === "Administrador") ?
-        <ul className={state.Stilo}>
-            <li>
-                <label id='Clientes' onClick={cambio}>
-                    <CustomerService2 className="iconNavBar" />
-                    Directorio
-                </label>
-            </li>
-            <li>
-                <label id='Usuarios' onClick={cambio}>
-                    <Users className="iconNavBar" />
-                    Usuarios
-                </label>
-            </li>
-            <li>
-                <label id='Notas' onClick={cambio}>
-                    <Inventory className="iconNavBar" />
-                    Notas
-                </label>
-            </li>
-            <li>
-                <label id='Inventario' onClick={cambio}>
-                    <Settings className="iconNavBar" />
-                    Inventario
-                </label>
-            </li>
-            <li>
-                <label id="Estadisticas">
-                    <Exit className="iconNavBar" />
-                    Estadisticas
-                </label>
-            </li>
-            <li>
-                <label onClick={salir} >
-                    <Exit className="iconNavBar" />
-                    Salir
-                </label>
-            </li>
-        </ul> :
+        <div>
+            <ListItem button onClick={cambio}>
+                <ListItemIcon>
+                    <ContactsIcon id='Clientes' />
+                </ListItemIcon>
+                <ListItemText id='Clientes' primary="Directorio" />
+            </ListItem>
+            <ListItem button onClick={cambio}>
+                <ListItemIcon>
+                    <PersonAddIcon id='Usuarios' />
+                </ListItemIcon>
+                <ListItemText id='Usuarios' primary="Usuarios" />
+            </ListItem>
+            <ListItem button onClick={cambio}>
+                <ListItemIcon>
+                    <ListAltIcon id='Notas' />
+                </ListItemIcon>
+                <ListItemText id='Notas' primary="Notas" />
+            </ListItem>
+            <ListItem button onClick={cambio}>
+                <ListItemIcon>
+                    <AssignmentTurnedInIcon id='Inventario' />
+                </ListItemIcon>
+                <ListItemText id='Inventario' primary="Inventarios" />
+            </ListItem>
+            <ListItem button onClick={cambio}>
+                <ListItemIcon>
+                    <BarChartIcon id="Estadisticas" />
+                </ListItemIcon>
+                <ListItemText id="Estadisticas" primary="Estadisticas" />
+            </ListItem>
+            <ListItem button onClick={salir}>
+                <ListItemIcon>
+                    <ExitToAppIcon />
+                </ListItemIcon>
+                <ListItemText primary="Salir" />
+            </ListItem>
+        </div>
+        :
         <ul className={state.Stilo}>
             <li>
                 <label id='Inventario/AgregarProduc' onClick={cambio}>
@@ -85,14 +88,9 @@ const NavBar = (props) => {
             </li>
         </ul>;
     return (
-        <main className={className}>
-            <nav
-                id="menu"
-            >
-                <img src="https://i.pinimg.com/originals/97/95/eb/9795ebef9b85576509c37dfce0c8aed8.jpg"  alt="Logo de la company" />
-                {Menu}
-            </nav>
-        </main>
+        <div>
+            {Menu}
+        </div>
     );
 }
 
