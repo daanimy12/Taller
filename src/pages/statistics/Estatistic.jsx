@@ -25,12 +25,12 @@ const Estatistic = () => {
         <Grid container spacing={3}>
             <Grid item xs={12} md={4} lg={6}>
                 <Paper>
-                    <h3>Hello, </h3>
+                    <h3>En, </h3>
                 </Paper>
             </Grid>
             <Grid item xs={12} md={4} lg={6}>
                 <Paper>
-                    <h3>Friend </h3>
+                    <h3>Mantenimiento </h3>
                 </Paper>
             </Grid>
         </Grid>

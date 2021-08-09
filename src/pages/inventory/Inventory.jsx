@@ -25,10 +25,14 @@ const Inventory = (props) => {
 
   }
 
-  const onFileChange = async (resp) => {
-    const url = await Universal.PushImagen("/HerramientasYRefacciones", resp);
-    const response = url;
-    return response;
+  const onFileChange = async (file) => {
+    try {
+      const response = await Universal.PushImagen("/test", file);
+      return response;
+    } catch (error) {
+      console.log(error)
+      return false;
+    }
   }
   //successfully added.. data
   const addOrEdit = async (values, resetForm) => {
@@ -55,13 +59,16 @@ const Inventory = (props) => {
         img,
       };
       const getUrlPhoto = await onFileChange(photo);
-      const url = getUrlPhoto[0];
-      playload.img = url.toString();
-      const newArr = { ...playload };
-      await Universal.PushUniversal("Inventario", newArr)
-      NotificationManager.success("Herramienta o Refacción agregado");
-      resetForm();
-      await getInvetory();
+      if (getUrlPhoto != false) {
+        const url = await getUrlPhoto[0];
+        playload.img = url.toString();
+        const newArr = { ...playload };
+        await Universal.PushUniversal("Inventario", newArr)
+        NotificationManager.success("Herramienta o Refacción agregado");
+        resetForm();
+        await getInvetory();
+      }
+
     } catch (error) {
       console.log('error: ', error);
       NotificationManager.error('Ocurrió un error: Faltan datos');

@@ -2,7 +2,16 @@ import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 import { colorPalette } from "../../system/styles/styles";
 import { NotificationManager } from "react-notifications";
-
+import { makeStyles } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Container from '@material-ui/core/Container';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import TextField from '@material-ui/core/TextField';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
 const inicialValuesF = {
   Key: '',
   folio: '',
@@ -11,10 +20,34 @@ const inicialValuesF = {
   price: 0,
   description: '',
   photo: null,
+  img: null,
   Type: 'herramienta',
 }
-
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(5),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  root: {
+    marginTop: theme.spacing(8),
+    maxWidth: 345,
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.primary.main,
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
 const Form = (props) => {
+  const classes = useStyles();
   const { inventoryEdit, addOrEdit, onRemove } = props;
   const [state, setState] = useState(inicialValuesF);
 
@@ -59,7 +92,7 @@ const Form = (props) => {
     }
   };
 
-  useEffect(() => {   
+  useEffect(() => {
     if (inventoryEdit != null) {
       const { Key, folio, names, amount, price, description, Type, img } = inventoryEdit;
       let playload = {
