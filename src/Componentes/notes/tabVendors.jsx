@@ -26,7 +26,7 @@ const MainContainer =  styled.form`
 
 const TabVendors = () => {
     const {
-        arrayVendors, setArrayVendors
+        arrayVendors, setArrayVendors, setSaveClic, onSaveData
     } = useNotesAction()
     const [state,setState] = React.useState(
         {
@@ -48,7 +48,7 @@ const TabVendors = () => {
         const { id, value } = target;
         setState((prev) => ( { ...prev, [id]: value  } ) )
     }
-    const onSave = (e) => {
+    const onSave = async (e) => {
         e.preventDefault()
         setArrayVendors([
             ...arrayVendors,
@@ -73,6 +73,7 @@ const TabVendors = () => {
                     <input id="invoiceAmount" value={state.invoiceAmount} onChange={onChangeState} />
                 </section>
                 <button type="submit" > Guardar </button>
+                <button type="button" onClick={onSaveData}> Guardar Nota  </button>
             </MainContainer>
     )
 }

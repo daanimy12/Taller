@@ -152,6 +152,18 @@ const TabPersonalData = (props) => {
             </div>
             <div className="boxInput">
                 <label>
+                    Anticipo:
+                </label>
+                <input
+                    type="number"
+                    name="advance"
+                    min={0}
+                    onChange={onChangeInput}
+                    value={state.advance}
+                />
+            </div>
+            <div className="boxInput">
+                <label>
                     Fecha:
                 </label>
                 <input

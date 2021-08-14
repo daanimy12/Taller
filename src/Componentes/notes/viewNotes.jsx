@@ -113,7 +113,13 @@ const ContainerView = styled.main`
 const imgLogo = `https://firebasestorage.googleapis.com/v0/b/tallerdaniel-7fa3d.appspot.com/o/imgGeneral%2FWhatsApp%20Image%202021-06-20%20at%2020.29.20.jpeg?alt=media&token=2fca255c-52a7-4d0c-879e-0d36549cefc7`;
 
 const ViewNotes = () => {
-    const { stateLocal, inventary, arrayVendors, validGeneralLocal } = useNotesAction();
+    const {
+        saveClic,
+        stateLocal,
+        inventary,
+        arrayVendors,
+        validGeneralLocal,
+    } = useNotesAction();
 
     const createHeaders = (keys) => {
         const result = [];
@@ -198,7 +204,7 @@ const ViewNotes = () => {
     }
     return (
         <ContainerView>
-            <DownloadForOffline className='icon' onClick={onDownload} />
+            {saveClic ? <DownloadForOffline className='icon' onClick={onDownload} /> : null}
             <img
                 alt="logo"
                 src={imgLogo}
