@@ -23,12 +23,13 @@ const NotesState = (props) => {
             createdAt: `${moment().format("YYYY-MM-DD")}`,
             lastName: "",
             total: 0,
-            customer: ""
+            customer: "",
+            advance: "",
         }
     );
     const [state, dispatch] = React.useReducer(ReducerNotes, stateLocal);
     const [arrayCustomers,setArrayCustomers] = React.useState([]);
-
+    const [saveClic, setSaveClic] = React.useState(true);
     const onClear = () => {
         setState(
             {
@@ -159,11 +160,27 @@ const NotesState = (props) => {
 
     }
 
+    const onSaveData = async () => {
+        try {
+            await Universal.PushUniversal("Notes",
+                {
+                    ...stateLocal,
+                    vendors: arrayVendors,
+                    inventary: inventary
+                        ?.filter((inv) => inv.count > 0)
+                });
+            NotificationManager.success('Nota Guardada con exito.')
+        } catch (e) {
+            console.error(e)
+        }
+    }
+
     const value = {
         inventary,
         stateLocal,
         arrayCustomers,
         arrayVendors,
+        saveClic,
         onClear,
         onFolio,
         loadCustomers,
@@ -171,7 +188,9 @@ const NotesState = (props) => {
         onSelectCustomer,
         onChangeInputSelect,
         setArrayVendors,
-        validGeneralLocal
+        validGeneralLocal,
+        setSaveClic,
+        onSaveData
     }
     return (
         <NotesContext.Provider
