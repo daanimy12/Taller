@@ -1,20 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
-import { colorPalette } from "../../system/styles/styles";
 import { NotificationManager } from "react-notifications";
 import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Container from '@material-ui/core/Container';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import TextField from '@material-ui/core/TextField';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
+
 const inicialValuesF = {
   Key: '',
   folio: '',
+  barcode: '',
   names: '',
   amount: 0,
   price: 0,
@@ -94,10 +86,11 @@ const Form = (props) => {
 
   useEffect(() => {
     if (inventoryEdit != null) {
-      const { Key, folio, names, amount, price, description, Type, img } = inventoryEdit;
-      let playload = {
+      const { Key, folio, barcode, names, amount, price, description, Type, img } = inventoryEdit;
+      let payload = {
         Key,
         folio,
+        barcode,
         names,
         amount,
         price,
@@ -106,13 +99,14 @@ const Form = (props) => {
         img,
       };
 
-      if (folio != null && names != null && amount != null && price != null && description != null && Type != null && img != null && Key != null) {
+      if (folio != null && barcode != null && names != null && amount != null && price != null && description != null && Type != null && img != null && Key != null) {
         setState({
-          ...playload,
+          ...payload,
         });
       }
     }
   }, [inventoryEdit])
+  
 
   return (
     <form className="boxMain" onSubmit={handleSubmit}>
@@ -122,6 +116,16 @@ const Form = (props) => {
         <input
           name="folio"
           value={state.folio}
+          onChange={onChangeInput}
+          required
+        // readOnly
+        />
+      </div>
+      <div className="boxInput" >
+        <label> Barcode: </label>
+        <input
+          name="barcode"
+          value={state.barcode}
           onChange={onChangeInput}
           required
         // readOnly

@@ -13,6 +13,21 @@ const Inventory = (props) => {
   const { className } = props;
   const [state, setState] = useState([]);
   const [stateEdit, setStateEdit] = useState([]);
+  const [filtro, setFiltro] = useState({
+    Type: 'herramienta'
+  });
+
+
+  const onChangeInput = ({ target }) => {
+    const { name, value } = target;
+    setFiltro(prev => ({
+      ...prev,
+      [name]: value,
+    }
+    ));
+  };
+
+  const search = (rows) => rows.filter((row) => row.Type.toLowerCase().indexOf(filtro.Type) > -1);
 
   const getInvetory = async () => {
     try {
@@ -44,25 +59,27 @@ const Inventory = (props) => {
         price,
         description,
         folio,
+        barcode,
         names,
         Type,
         img,
       } = copyArr;
 
-      const playload = {
+      const payload = {
         amount,
         price,
         description,
         folio,
+        barcode,
         names,
         Type,
         img,
       };
       const getUrlPhoto = await onFileChange(photo);
       if (getUrlPhoto != false) {
-        const url = await getUrlPhoto[0];
-        playload.img = url.toString();
-        const newArr = { ...playload };
+        const url = getUrlPhoto[0];
+        payload.img = url.toString();
+        const newArr = { ...payload };
         await Universal.PushUniversal("Inventario", newArr)
         NotificationManager.success("Herramienta o Refacción agregado");
         resetForm();
@@ -116,7 +133,7 @@ const Inventory = (props) => {
           </article>
           <article>
             <div className="boxMain">
-              <TableInventory values={state} editInventory={editInventory} />
+              <TableInventory values={search(state)} editInventory={editInventory} onChangeInput={onChangeInput} filtro={filtro} />
             </div>
           </article>
         </section>
