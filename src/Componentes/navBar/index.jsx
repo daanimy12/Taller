@@ -21,10 +21,13 @@ const NavBar = (props) => {
     const cambio = (value) => {
         history.push('/Customers/'+[value]);
     };
+    const { Eliminar } = Login();
     const salir = () => {
         // Eliminacion de token //
+        Eliminar();
+        window.location.reload();
         history.push('/');
-        Login.Eliminar();
+
     };
 
     const Menu =  (Cliente === "Administrador") ?
@@ -59,7 +62,7 @@ const NavBar = (props) => {
                 </ListItemIcon>
                 <ListItemText id="Estadisticas" primary="Estadisticas" />
             </ListItem>
-            <ListItem button onClick={salir}>
+            <ListItem button onClick={() => salir()}>
                 <ListItemIcon>
                     <ExitToAppIcon />
                 </ListItemIcon>

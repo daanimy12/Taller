@@ -3,18 +3,18 @@ import styled from "styled-components";
 import { NotificationManager } from "react-notifications";
 import { makeStyles } from '@material-ui/core/styles';
 
-const inicialValuesF = {
-  Key: '',
-  folio: '',
-  barcode: '',
-  names: '',
-  amount: 0,
-  price: 0,
-  description: '',
-  photo: null,
-  img: null,
-  Type: 'herramienta',
-}
+  const inicialValuesF = {
+    Key: '',
+    folio: '',
+    barcode: '',
+    names: '',
+    amount: 0,
+    price: 0,
+    description: '',
+    photo: null,
+    img: null,
+    Type: 'herramienta',
+  }
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(5),

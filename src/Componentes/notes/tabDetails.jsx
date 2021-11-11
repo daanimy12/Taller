@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { colorPalette } from "../../system/styles/styles";
 import PropTypes from "prop-types";
-import Universal from "../../Helpers/Universal";
 import {NotificationManager} from "react-notifications";
 import {useNotesAction} from "./contextos/contNotes";
+import VwServices from './vwServices'
 
 const MainContainer = styled.main`
   padding: 10px;
@@ -20,7 +20,6 @@ const TabDetails = () => {
         inventary,
         onChangeInputSelect
     } = useNotesAction();
-
 
 
     return (
@@ -59,6 +58,7 @@ const TabDetails = () => {
                 }
                 </tbody>
             </table>
+            {VwServices()}
         </MainContainer>
     )
 }

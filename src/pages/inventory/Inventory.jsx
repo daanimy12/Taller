@@ -22,6 +22,7 @@ const Inventory = (props) => {
     const { name, value } = target;
     setFiltro(prev => ({
       ...prev,
+      ...state.length === 0,
       [name]: value,
     }
     ));
