@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
-import RemoveButton from '@material-ui/icons/Remove';
-import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
-import Universal from "../../Helpers/Universal";
 import { NotificationManager } from "react-notifications";
+import { useNotesAction } from "./contextos/contNotes"
 
 
 const useStyles = makeStyles((theme) => ({
@@ -14,128 +11,109 @@ const useStyles = makeStyles((theme) => ({
     root: {
         '& .MuiTextField-root': {
             marginLeft: theme.spacing(1),
-            marginTop: theme.spacing(1)
+            marginTop: theme.spacing(2)
         }
     },
     button: {
-        margin: theme.spacing(1),
+        margin: theme.spacing(2),
     }
 
 }))
 
-const Dsdata = [{
-    Folio: '',
+const inicialValues = {
+    Cantidad: 1,
     Nombre: '',
     Descripcion: '',
-    Precio: ''
-}];
+    Precio: 0
+};
 
 const VwServices = () => {
 
     const classes = useStyles();
-    const [services, setServices] = useState(Dsdata);
-
-    const handleChange = (index, event) => {
-        const values = [...services];
-        values[index][event.target.name] = event.target.value;
-        setServices(values)
-    }
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await Universal.PushUniversal("Servicios", services);
-            NotificationManager.success("servicio gregado");
-
-        } catch (error) {
-            NotificationManager.error('Ocurrió un error');
-            console.log('error >', error)
+    const [services, setServices] = useState(inicialValues);
+    const { arrayServices, setArrayServices } = useNotesAction();
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setServices(prevState => ({
+            ...services,
+            [name]: value                                                                                     
         }
-
+        ))
     }
-
-    const handleRemoveServices = (index) => {
-        const values = [...services];
-
-        if (index > 0)
-            values.splice(index, 1);
-
-        setServices(values);
-    };
-
-    const handleAddServices = () => {
-        setServices([...services,
-        {
-            Folio: '',
+    const onCleanFields = () => {
+        setServices({
+            Cantidad: 1,
             Nombre: '',
             Descripcion: '',
-            Precio: ''
-        }
-        ])
+            Precio: 0
+        })
     }
 
-    return (
-        <>
-            <form className={classes.root} onSubmit={handleSubmit}>
-                {services.map((service, index) => (
-                    <div key={index}>
-                        <TextField
-                            hiddenLabel
-                            name="Folio"
-                            label="folio"
-                            variant="filled"
-                            size="small"
-                            value={service.Folio}
-                            onChange={event => handleChange(index, event)}
-                        />
-                        <TextField
-                            hiddenLabel
-                            name="Nombre"
-                            label="nombre"
-                            variant="filled"
-                            size="small"
-                            value={service.Nombre}
-                            onChange={event => handleChange(index, event)}
-                        />
-                        <TextField
-                            hiddenLabel
-                            name="Descripcion"
-                            label="Descripcion"
-                            variant="filled"
-                            size="small"
-                            value={service.Descripcion}
-                            onChange={event => handleChange(index, event)}
-                        />
-                        <TextField
-                            hiddenLabel
-                            name="Precio"
-                            label="precio"
-                            variant="filled"
-                            size="small"
-                            value={service.precio}
-                            onChange={event => handleChange(index, event)}
-                        />
-                        <IconButton
-                            onClick={() => handleRemoveServices(index)}
-                        >
-                            <RemoveButton />
-                        </IconButton>
-                        <IconButton
-                            onClick={handleAddServices}
-                        >
-                            <AddIcon />
-                        </IconButton>
-                    </div>
-                ))}
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setArrayServices(
+            prevState => ([
+                ...arrayServices,
+                services,
+            ]))
+        onCleanFields();
+        NotificationManager.success("servicio agregado")
+    };
+
+    const tooggle = () => {
+        if (services.Nombre !== '' && services.Precio > 0) {
+            return (
                 <Button
-                    className={classes.button}
                     variant="contained"
                     color="primary"
                     type="submit"
                     onClick={handleSubmit}
                 >send</Button>
-            </form>
-        </>)
+            )
+        }
+    }
+
+    return (
+        <form className={classes.root} onSubmit={handleSubmit}>
+            <h3> Servicio</h3>
+            <TextField
+                hiddenLabel
+                name="Nombre"
+                label="nombre"
+                variant="outlined"
+                size="small"
+                value={services.Nombre}
+                onChange={e => handleChange(e)}
+                required
+            />
+            <TextField
+                hiddenLabel
+                name="Descripcion"
+                label="Descripcion"
+                variant="outlined"
+                size="small"
+                value={services.Descripcion}
+                onChange={e => handleChange(e)}
+                required
+            />
+            <TextField
+                name="Precio"
+                label="precio"
+                variant="outlined"
+                size="small"
+                type="number"
+                value={services.Precio}
+                onChange={e => handleChange(e)}
+                required
+            />
+
+            <div className={classes.button}>
+                {
+                    tooggle()
+                }
+            </div >
+        </form>
+    )
 }
 
 export default VwServices;

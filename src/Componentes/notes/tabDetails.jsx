@@ -1,9 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { colorPalette } from "../../system/styles/styles";
 import PropTypes from "prop-types";
-import {NotificationManager} from "react-notifications";
-import {useNotesAction} from "./contextos/contNotes";
+import { NotificationManager } from "react-notifications";
+import { useNotesAction } from "./contextos/contNotes";
 import VwServices from './vwServices'
 
 const MainContainer = styled.main`
@@ -21,7 +20,6 @@ const TabDetails = () => {
         onChangeInputSelect
     } = useNotesAction();
 
-
     return (
         <MainContainer>
             <table className="table users table-hover">
@@ -35,27 +33,28 @@ const TabDetails = () => {
                     </tr>
                 </thead>
                 <tbody>
-                {
-                    inventary?.map(
-                        (val, idx) => (
-                            <tr key={idx}>
-                                <td>{val.folio}</td>
-                                <td>{val.names}</td>
-                                <td>{val.amount}</td>
-                                <td>{val.description}</td>
-                                <td>
-                                    <input
-                                        type="number"
-                                        placeholder="0"
-                                        min={0}
-                                        value={val.count || 0}
-                                        onChange={(e) => onChangeInputSelect(e,val.Key)}
-                                    />
-                                </td>
-                            </tr>
-                        )
-                    )
-                }
+                    {
+                        inventary?.filter(item => item.Type === 'refaccion')?.
+                            map(
+                                (val, idx) => (
+                                    <tr key={idx}>
+                                        <td>{val.folio}</td>
+                                        <td>{val.names}</td>
+                                        <td>{val.amount}</td>
+                                        <td>{val.description}</td>
+                                        <td>
+                                            <input
+                                                type="number"
+                                                placeholder="0"
+                                                min={0}
+                                                value={val.count || 0}
+                                                onChange={(e) => onChangeInputSelect(e, val.Key)}
+                                            />
+                                        </td>
+                                    </tr>
+                                )
+                            )
+                    }
                 </tbody>
             </table>
             {VwServices()}
@@ -68,6 +67,6 @@ TabDetails.propType = {
 }
 TabDetails.defaultProps = {
     state: "",
-    handleChange: () => {}
+    handleChange: () => { }
 }
 export default TabDetails;

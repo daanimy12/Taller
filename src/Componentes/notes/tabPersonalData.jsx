@@ -64,7 +64,7 @@ const TabPersonalData = (props) => {
                 <label>
                     Cliente:
                 </label>
-                <select name="customer" onChange={onChangeInput} value={state.customer} >
+                <select name="customer" onChange={onChangeInput} value={state.customer}>
                     <option key="999999999" value=""> Sin cliente elegido </option>
                     {
                         arrayCustomers.map(

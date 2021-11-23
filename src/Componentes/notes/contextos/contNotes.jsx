@@ -2,17 +2,19 @@ import React, { createContext } from 'react';
 import Universal from "../../../Helpers/Universal";
 import moment from "moment";
 import ReducerNotes from "./reducerNotes";
-import {NotificationManager} from "react-notifications";
+import { NotificationManager } from "react-notifications";
 const NotesContext = createContext();
 
 const NotesState = (props) => {
     const { children } = props;
-    const [ inventary, setInventary ] = React.useState(
+    const [inventary, setInventary] = React.useState(
         []
     );
     // array de los datos de provedores de la nota
     const [arrayVendors, setArrayVendors] = React.useState([]);
-    const [stateLocal,setState] = React.useState(
+    // array de los servicios de provedores de la nota
+    const [arrayServices, setArrayServices] = React.useState([]);
+    const [stateLocal, setState] = React.useState(
         {
             folio: "",
             name: "",
@@ -28,7 +30,7 @@ const NotesState = (props) => {
         }
     );
     const [state, dispatch] = React.useReducer(ReducerNotes, stateLocal);
-    const [arrayCustomers,setArrayCustomers] = React.useState([]);
+    const [arrayCustomers, setArrayCustomers] = React.useState([]);
     const [saveClic, setSaveClic] = React.useState(true);
     const onClear = () => {
         setState(
@@ -102,38 +104,53 @@ const NotesState = (props) => {
         }, []
     );
 
+    const updateTotal = () => {
+        let total = 0;
+
+        let totalInventary = 0;
+        inventary?.filter((inv) => inv.count > 0)?.
+            forEach(arr => totalInventary += (+arr?.price * arr?.count)
+            );
+
+        let totalService = 0;
+        arrayServices.forEach(item => totalService += +item.Precio);
+
+        total = totalInventary + totalService
+        setState(
+            prev => (
+                {
+                    ...prev,
+                    total
+                }
+            )
+        )
+    }
+    React.useEffect(
+        () => {
+            updateTotal();
+        }, [arrayServices, inventary]
+    )
+
     const onChangeInputSelect = ({ target }, id) => {
         const { value } = target;
         if(value < 0) {
             NotificationManager.error("No se aceptan datos negativos")
         }else {
             const inventaryLocal = inventary.map((inventa,idx) => ( { ...inventa, idx } ) )
-            const findArray = inventaryLocal.find( (inve) => inve.Key === id );
-            const filterArray = inventaryLocal.filter( (inve) => inve.Key !== id );
+            /*Regresa el item que tiene el mismo id al id seleccionado*/
+            const findArray = inventaryLocal.find((inve) => inve.Key === id);
             findArray.count = value;
+            /*Filtra los items que sean diferentes al id seleccionado*/
+            const filterArray = inventaryLocal.filter((inve) => inve.Key !== id);
+
             const arrayFinish = [
                 ...filterArray,
                 findArray
             ];
+            // console.log('debugg ', arrayFinish)
             setInventary(
                 arrayFinish.sort((a,b) => a.idx - b.idx)
             );
-            // variable total
-            let totalPrice = 0;
-            arrayFinish?.filter((inv) => inv.count > 0)?.forEach(
-                (arr) => {
-                    totalPrice += (+arr?.price * arr?.count);
-                }
-            );
-            // console.log(totalPrice);
-            setState(
-                prev => (
-                    {
-                        ...prev,
-                        total: totalPrice
-                    }
-                )
-            )
         }
     }
 
@@ -165,6 +182,7 @@ const NotesState = (props) => {
             await Universal.PushUniversal("Notes",
                 {
                     ...stateLocal,
+                    services: arrayServices,
                     vendors: arrayVendors,
                     inventary: inventary
                         ?.filter((inv) => inv.count > 0)
@@ -179,6 +197,7 @@ const NotesState = (props) => {
         inventary,
         stateLocal,
         arrayCustomers,
+        arrayServices,
         arrayVendors,
         saveClic,
         onClear,
@@ -187,7 +206,9 @@ const NotesState = (props) => {
         onChangeInput,
         onSelectCustomer,
         onChangeInputSelect,
+        setArrayServices,
         setArrayVendors,
+        setState,
         validGeneralLocal,
         setSaveClic,
         onSaveData

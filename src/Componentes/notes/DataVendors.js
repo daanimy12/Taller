@@ -6,30 +6,30 @@ import useTable from './useTable';
 
 
 const headCells = [
-    { id: '1', label: 'Nombre' },
-    { id: '2', label: 'Descripcion' },
+    { id: '1', label: 'Folio' },
+    { id: '2', label: 'Marca' },
     { id: '3', label: 'Importe' },
 ]
-const TbvwServices = () => {
-    const { arrayServices } = useNotesAction();
-    const { TblContainer, TblHead } = useTable(arrayServices, headCells);
+const DataVendors = () => {
+    const { arrayVendors } = useNotesAction();
+    const { TblContainer, TblHead } = useTable(arrayVendors, headCells);
 
 
-    const handleService = () => {
-        if (arrayServices.length === 0) {
+    const handleVendor = () => {
+        if (arrayVendors.length === 0) {
             return null;
         } else {
             return (<>
-                <h1 className="titleVendor"> Servicios </h1>
+                <h1 className="titleVendor"> Provedores </h1>
                 <TblContainer>
                     <TblHead />
                     <TableBody>
                         {
-                            arrayServices.map((item, i) => (
+                            arrayVendors.map((item, i) => (
                                 <TableRow key={i}>
-                                    <TableCell>{item?.Nombre || 0} </TableCell>
-                                    <TableCell>{item.Descripcion} </TableCell>
-                                    <TableCell>{item?.Precio || 0}</TableCell>
+                                    <TableCell> {item?.folio || 0}  </TableCell>
+                                    <TableCell>{item.name}  </TableCell>
+                                    <TableCell>{item?.invoiceAmount || 0}</TableCell>
                                 </TableRow>
                             )
                             )
@@ -41,9 +41,9 @@ const TbvwServices = () => {
     }
     return (
         <>
-            {handleService()}
+            {handleVendor()}
         </>
     )
 }
 
-export default TbvwServices;
+export default DataVendors;

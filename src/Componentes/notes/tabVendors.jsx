@@ -1,7 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { colorPalette } from "../../system/styles/styles"
-import {useNotesAction} from "./contextos/contNotes"
+import { colorPalette } from "../../system/styles/styles";
+import { useNotesAction } from "./contextos/contNotes";
+import { NotificationManager } from "react-notifications";
+
+
 const MainContainer =  styled.form`
   display: grid;
   grid-gap: 10px;
@@ -26,7 +29,7 @@ const MainContainer =  styled.form`
 
 const TabVendors = () => {
     const {
-        arrayVendors, setArrayVendors, setSaveClic, onSaveData
+        arrayVendors, setArrayVendors, onSaveData
     } = useNotesAction()
     const [state,setState] = React.useState(
         {
@@ -46,7 +49,12 @@ const TabVendors = () => {
     }
     const onChangeState = ({ target }) => {
         const { id, value } = target;
-        setState((prev) => ( { ...prev, [id]: value  } ) )
+        setState(
+            prev => ({
+                ...prev,
+                [id]: value
+            })
+        )
     }
     const onSave = async (e) => {
         e.preventDefault()
@@ -54,6 +62,7 @@ const TabVendors = () => {
             ...arrayVendors,
             state
         ]);
+        NotificationManager.success("succees")
         onClear();
     }
     return (
@@ -62,15 +71,15 @@ const TabVendors = () => {
                     <label htmlFor="folio">
                         Folio de Factura :
                     </label>
-                    <input id="folio" value={state.folio} onChange={onChangeState} />
+                <input id="folio" value={state.folio} onChange={onChangeState} required />
                 </section>
                 <section>
                     <label htmlFor="name" > Nombre de la marca / empresa </label>
-                    <input id="name" value={state.name} onChange={onChangeState} />
+                <input id="name" value={state.name} onChange={onChangeState} required />
                 </section>
                 <section>
                     <label htmlFor="name" > Monto de la factura</label>
-                    <input id="invoiceAmount" value={state.invoiceAmount} onChange={onChangeState} />
+                <input id="invoiceAmount" value={state.invoiceAmount} onChange={onChangeState} required />
                 </section>
                 <button type="submit" > Guardar </button>
                 <button type="button" onClick={onSaveData}> Guardar Nota  </button>
