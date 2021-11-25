@@ -16,6 +16,7 @@ import Container from '@material-ui/core/Container';
 import AappBar from '../appBar/AappBar';
 import Ddrawer from '../drawer/Ddrawer';
 import Estatistic from '../statistics/Estatistic';
+import Anticipo from '../anticipo/Anticipo';
 
 function Copyright() {
     return (
@@ -94,7 +95,7 @@ const Customers = (props) => {
                 <Route path='/Customers/Clientes' component={Cliente} />
                 <Route path='/Customers/Notas' component={NoteContainer} />
                 <Route path='/Customers/Inventario' component={Inventory} />
-                <Route path='/Customers/Estadisticas' component={Estatistic} />
+                <Route path='/Customers/Estadisticas' component={Anticipo} />
             </Switch>
             :
             <Switch>

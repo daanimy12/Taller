@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { colorPalette } from "../../system/styles/styles";
+import { useNotesAction } from "./contextos/contNotes";
 
 const FormMain = styled.form`
   padding: 10px;
@@ -38,12 +39,12 @@ const FormMain = styled.form`
   
 `;
 
-const TabPersonalData = (props) => {
+const TabPersonalData = props => {
     const {
-        state,
+        stateLocal,
         onChangeInput,
         arrayCustomers
-    } = props;
+    } = useNotesAction();
 
 
     return (
@@ -57,14 +58,14 @@ const TabPersonalData = (props) => {
                     disabled
                     type="text"
                     name="folio"
-                    value={state.folio}
+                    value={stateLocal.folio}
                 />
             </div>
             <div className="boxInput">
                 <label>
                     Cliente:
                 </label>
-                <select name="customer" onChange={onChangeInput} value={state.customer}>
+                <select name="customer" onChange={onChangeInput} value={stateLocal.customer}>
                     <option key="999999999" value=""> Sin cliente elegido </option>
                     {
                         arrayCustomers.map(
@@ -82,11 +83,11 @@ const TabPersonalData = (props) => {
                     Nombre:
                 </label>
                 <input
-                    disabled={state.customer}
+                    disabled={stateLocal.customer}
                     type="text"
                     name="name"
                     onChange={onChangeInput}
-                    value={state.name}
+                    value={stateLocal.name}
                 />
             </div>
             <div className="boxInput">
@@ -94,11 +95,11 @@ const TabPersonalData = (props) => {
                     Apellido:
                 </label>
                 <input
-                    disabled={state.customer}
+                    disabled={stateLocal.customer}
                     type="text"
                     name="lastName"
                     onChange={onChangeInput}
-                    value={state.lastName}
+                    value={stateLocal.lastName}
                 />
             </div>
             <div className="boxInput">
@@ -106,11 +107,11 @@ const TabPersonalData = (props) => {
                     Dirección:
                 </label>
                 <input
-                    disabled={state.customer}
+                    disabled={stateLocal.customer}
                     type="text"
                     name="direction"
                     onChange={onChangeInput}
-                    value={state.direction}
+                    value={stateLocal.direction}
                 />
             </div>
             <hr/>
@@ -120,11 +121,11 @@ const TabPersonalData = (props) => {
                     Modelo:
                 </label>
                 <input
-                    disabled={state.customer}
+                    disabled={stateLocal.customer}
                     type="text"
                     name="modelCar"
                     onChange={onChangeInput}
-                    value={state.modelCar}
+                    value={stateLocal.modelCar}
                 />
             </div>
             <div className="boxInput">
@@ -132,11 +133,11 @@ const TabPersonalData = (props) => {
                     Marca:
                 </label>
                 <input
-                    disabled={state.customer}
+                    disabled={stateLocal.customer}
                     type="text"
                     name="brand"
                     onChange={onChangeInput}
-                    value={state.brand}
+                    value={stateLocal.brand}
                 />
             </div>
             <div className="boxInput">
@@ -147,7 +148,7 @@ const TabPersonalData = (props) => {
                     type="text"
                     name="licensePlate"
                     onChange={onChangeInput}
-                    value={state.licensePlate}
+                    value={stateLocal.licensePlate}
                 />
             </div>
             <div className="boxInput">
@@ -159,7 +160,7 @@ const TabPersonalData = (props) => {
                     name="advance"
                     min={0}
                     onChange={onChangeInput}
-                    value={state.advance}
+                    value={stateLocal?.advance}
                 />
             </div>
             <div className="boxInput">
@@ -170,7 +171,7 @@ const TabPersonalData = (props) => {
                     type="date"
                     name="createdAt"
                     onChange={onChangeInput}
-                    value={state.createdAt}
+                    value={stateLocal.createdAt}
                 />
             </div>
             <hr/>
@@ -181,7 +182,7 @@ const TabPersonalData = (props) => {
                 <label
                     className="TotalInput"
                 >
-                    {state.total}
+                    {stateLocal.total}
                 </label>
             </div>
         </FormMain>

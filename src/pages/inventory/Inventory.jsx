@@ -116,12 +116,8 @@ const Inventory = (props) => {
     onCancel();
   }
 
-  useEffect(async () => {
-    try {
-      await getInvetory();
-    } catch (error) {
-      console.log('error: ', error);
-    }
+  useEffect(() => {
+    getInvetory();
   }, [])
 
   const RenderComponents = () => {

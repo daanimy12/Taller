@@ -1,13 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { colorPalette } from "../../system/styles/styles";
-import {AppBar, Tabs,Tab } from '@material-ui/core';
+import { AppBar, Tabs, Tab } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { useTheme } from '@material-ui/core/styles';
 import SwipeableViews from 'react-swipeable-views';
 import TabPersonalData from "./tabPersonalData";
 import TabDetails from "./tabDetails";
-import {useNotesAction} from "./contextos/contNotes";
 import TabVendors from "./tabVendors";
 
 const MainTabNotes = styled.main`
@@ -46,12 +45,6 @@ const a11yProps = (index) => ({
 const TabsNotes = (props) => {
     const { countStep, handleChange } = props;
     const theme = useTheme();
-    const {
-        stateLocal,
-        onChangeInput,
-        onSelectCustomer,
-        arrayCustomers
-    } = useNotesAction();
 
     return (
         <MainTabNotes>
@@ -75,17 +68,13 @@ const TabsNotes = (props) => {
                 index={countStep}
                 onChangeIndex={handleChange}
             >
-
                 <TabPanel index={0} value={countStep}>
                     <TabPersonalData
-                        onChangeInput={onChangeInput}
-                        onSelectCustomer={onSelectCustomer}
-                        state={stateLocal}
-                        arrayCustomers={arrayCustomers}
+                    // onSelectCustomer={onSelectCustomer}
                     />
                 </TabPanel>
                 <TabPanel index={1} value={countStep}>
-                    <TabDetails  data={stateLocal} />
+                    <TabDetails />
                 </TabPanel>
                 <TabPanel index={2} value={countStep}>
                     <TabVendors />
@@ -100,7 +89,7 @@ TabsNotes.propType = {
 }
 TabsNotes.defaultProps = {
     countStep: "",
-    handleChange: () => {}
+    handleChange: () => { }
 }
 
 export default TabsNotes;

@@ -28,9 +28,7 @@ const MainContainer =  styled.form`
 `;
 
 const TabVendors = () => {
-    const {
-        arrayVendors, setArrayVendors, onSaveData
-    } = useNotesAction()
+    const { arrayVendors, setArrayVendors } = useNotesAction()
     const [state,setState] = React.useState(
         {
             folio: '',
@@ -81,8 +79,7 @@ const TabVendors = () => {
                     <label htmlFor="name" > Monto de la factura</label>
                 <input id="invoiceAmount" value={state.invoiceAmount} onChange={onChangeState} required />
                 </section>
-                <button type="submit" > Guardar </button>
-                <button type="button" onClick={onSaveData}> Guardar Nota  </button>
+            <button type="submit" > Guardar </button>
             </MainContainer>
     )
 }

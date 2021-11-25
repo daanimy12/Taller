@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { colorPalette } from "../../system/styles/styles";
-import {PropTypes} from 'prop-types';
 import TabsNotes from "../../Componentes/notes/tabNotes";
 import NotesState from "../../Componentes/notes/contextos/contNotes";
 import ViewNotes from "../../Componentes/notes/viewNotes";

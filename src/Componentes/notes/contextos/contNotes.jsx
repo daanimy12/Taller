@@ -3,6 +3,8 @@ import Universal from "../../../Helpers/Universal";
 import moment from "moment";
 import ReducerNotes from "./reducerNotes";
 import { NotificationManager } from "react-notifications";
+import { v4 as uuid } from "uuid";
+
 const NotesContext = createContext();
 
 const NotesState = (props) => {
@@ -10,9 +12,9 @@ const NotesState = (props) => {
     const [inventary, setInventary] = React.useState(
         []
     );
-    // array de los datos de provedores de la nota
+    // datos de provedores de la nota
     const [arrayVendors, setArrayVendors] = React.useState([]);
-    // array de los servicios de provedores de la nota
+    // datos de servicios de la nota
     const [arrayServices, setArrayServices] = React.useState([]);
     const [stateLocal, setState] = React.useState(
         {
@@ -26,7 +28,7 @@ const NotesState = (props) => {
             lastName: "",
             total: 0,
             customer: "",
-            advance: "",
+            advance: 0,
         }
     );
     const [state, dispatch] = React.useReducer(ReducerNotes, stateLocal);
@@ -35,6 +37,7 @@ const NotesState = (props) => {
     const onClear = () => {
         setState(
             {
+                folio: "",
                 name: "",
                 direction: "",
                 modelCar: "",
@@ -46,11 +49,12 @@ const NotesState = (props) => {
                 customer: ""
             }
         )
+
     }
 
     const onFolio = () => {
         const data = `SAuto-${Math.floor(Math.random() * 999999)}`;
-        setState( prev => ({ ...prev, folio: data }));
+        setState(prev => ({ ...prev, folio: data }));
     }
 
     const loadCustomers = async () => {
@@ -59,15 +63,15 @@ const NotesState = (props) => {
     }
 
     const onSelectCustomer = (id) => {
-        const findData = arrayCustomers?.find( (customer) => customer?.invoice === id );
-        if(findData) {
+        const findData = arrayCustomers?.find((customer) => customer?.invoice === id);
+        if (findData) {
             const {
                 name,
                 lastName,
                 brand,
                 modelCar,
                 direction
-            } =  findData;
+            } = findData;
             setState(
                 (prev) => (
                     {
@@ -88,10 +92,10 @@ const NotesState = (props) => {
 
     const onChangeInput = ({ target }) => {
         const { name, value } = target;
-        if(name === "customer") onSelectCustomer(value)
-        setState( prev => ({ ...prev, [name]: value }));
+        if (name === "customer") onSelectCustomer(value)
+        setState(prev => ({ ...prev, [name]: value }));
     }
-    const loadData = async  () => {
+    const loadData = async () => {
         const items = await Universal.ConsultaUniversal('Inventario');
         setInventary(items);
     }
@@ -133,10 +137,10 @@ const NotesState = (props) => {
 
     const onChangeInputSelect = ({ target }, id) => {
         const { value } = target;
-        if(value < 0) {
+        if (value < 0) {
             NotificationManager.error("No se aceptan datos negativos")
-        }else {
-            const inventaryLocal = inventary.map((inventa,idx) => ( { ...inventa, idx } ) )
+        } else {
+            const inventaryLocal = inventary.map((inventa, idx) => ({ ...inventa, idx }))
             /*Regresa el item que tiene el mismo id al id seleccionado*/
             const findArray = inventaryLocal.find((inve) => inve.Key === id);
             findArray.count = value;
@@ -149,7 +153,7 @@ const NotesState = (props) => {
             ];
             // console.log('debugg ', arrayFinish)
             setInventary(
-                arrayFinish.sort((a,b) => a.idx - b.idx)
+                arrayFinish.sort((a, b) => a.idx - b.idx)
             );
         }
     }
@@ -157,7 +161,7 @@ const NotesState = (props) => {
     const isEmpetyState = (value, comp = '') => {
         return value !== comp;
     }
-    const validGeneralLocal =()=>{
+    const validGeneralLocal = () => {
         const {
             folio,
             name,
@@ -177,7 +181,33 @@ const NotesState = (props) => {
 
     }
 
+    const handleAnticipos = async () => {
+        const {
+            customer,
+            folio,
+            createdAt,
+            advance,
+            total
+        } = stateLocal;
+        const payload = {
+            IDAnticipo: uuid(),
+            customer,
+            folio,
+            createdAt,
+            advance,
+            total
+        }
+        try {
+            if (folio) {
+                if (advance > 0) {
+                    await Universal.PushUniversal("Anticipos", payload);
+                }
+            }
+        } catch (error) { console.log('error', error) }
+    }
+
     const onSaveData = async () => {
+        handleAnticipos();
         try {
             await Universal.PushUniversal("Notes",
                 {
@@ -187,8 +217,11 @@ const NotesState = (props) => {
                     inventary: inventary
                         ?.filter((inv) => inv.count > 0)
                 });
+            onClear();
+            window.location.reload();
             NotificationManager.success('Nota Guardada con exito.')
         } catch (e) {
+            onClear();
             console.error(e)
         }
     }

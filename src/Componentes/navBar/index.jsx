@@ -24,10 +24,11 @@ const NavBar = (props) => {
     const { Eliminar } = Login();
     const salir = () => {
         // Eliminacion de token //
+        if (window.confirm('Seguro que desea salir?')) {
         Eliminar();
         window.location.reload();
         history.push('/');
-
+        }
     };
 
     const Menu =  (Cliente === "Administrador") ?
@@ -58,9 +59,9 @@ const NavBar = (props) => {
             </ListItem>
             <ListItem button onClick={()=>cambio('Estadisticas')}>
                 <ListItemIcon>
-                    <BarChartIcon id="Estadisticas" />
+                    <BarChartIcon id="Anticipos" />
                 </ListItemIcon>
-                <ListItemText id="Estadisticas" primary="Estadisticas" />
+                <ListItemText id="Anticipos" primary="Anticipos" />
             </ListItem>
             <ListItem button onClick={() => salir()}>
                 <ListItemIcon>

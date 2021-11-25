@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from "styled-components";
-import {firebaseDatabase} from '../../system/model/firebase/firebase';
+import { firebaseDatabase } from '../../system/model/firebase/firebase';
 import Alert from 'react-s-alert';
-import { colorPalette } from  "../../system/styles/styles"
+import { colorPalette } from "../../system/styles/styles"
 import HelperLogin from '../../Helpers/Login';
-import {NotificationManager} from "react-notifications";
+import { NotificationManager } from "react-notifications";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -43,13 +43,13 @@ const Loggin = (props) => {
     const classes = useStyles();
     const formRef = React.useRef();
     const { className } = props;
-    const [state,setState] = React.useState({
+    const [state, setState] = React.useState({
         email: '',
         password: '',
         title: ""
     });
 
-    const HelpersLogin =  HelperLogin();
+    const HelpersLogin = HelperLogin();
 
 
     React.useEffect(
@@ -63,7 +63,7 @@ const Loggin = (props) => {
 
     const validar = async () => {
         try {
-            const {email, password} = {...state}
+            const { email, password } = { ...state }
             console.log(state)
             const snapshot = await firebaseDatabase.ref('Usuarios').orderByChild('Usuario').equalTo(email).once('value');
             const validarPassWord = await HelpersLogin.Validar(snapshot, password);
@@ -91,7 +91,7 @@ const Loggin = (props) => {
         const name = e.target.id;
         const value = e.target.value;
         console.log(state)
-        setState(prev => ({...prev,[name]: value}));
+        setState(prev => ({ ...prev, [name]: value }));
     };
 
     const onKeyPress = e => {
@@ -105,25 +105,25 @@ const Loggin = (props) => {
 
     const success = (i = []) => {
         HelpersLogin.Encriptar(i);
-        if(i.Tipo === 'Vendedor'){
+        if (i.Tipo === 'Vendedor') {
             HelpersLogin.CambioURL('/Customers/Venta')
-        }else{
+        } else {
             HelpersLogin.CambioURL('/Customers/Clientes')
         }
     }
 
-    const success_observador = (date='') => {
+    const success_observador = (date = '') => {
         // console.log(date)
-        if(date === 'Vendedor'){
+        if (date === 'Vendedor') {
             HelpersLogin.CambioURL('/Customers/Venta')
-        }else{
+        } else {
             HelpersLogin.CambioURL('/Customers/Clientes')
         }
     }
 
     const error_inesperado = () => {
-        setState(prev => ({...prev,title: 'Error Inesperado'}));
-        NotificationManager.error('Error Inesperado',"",3000);
+        setState(prev => ({ ...prev, title: 'Error Inesperado' }));
+        NotificationManager.error('Error Inesperado', "", 3000);
     }
 
     const error_observador = () => {
@@ -131,7 +131,7 @@ const Loggin = (props) => {
     }
 
     const error = () => {
-        setState(prev=> ({title: 'Usuario o contraseña erroneas'}, () => {
+        setState(prev => ({ title: 'Usuario o contraseña erroneas' }, () => {
             Alert.error(state.title, {
                 position: 'top',
                 effect: 'slide',
@@ -178,7 +178,7 @@ const Loggin = (props) => {
                                 id="password"
                                 autoComplete="current-password"
                                 onKeyPress={onKeyPress}
-                        value={state.password}
+                                value={state.password}
                                 onChange={updatestate}
                             />
                             <Button
@@ -191,7 +191,7 @@ const Loggin = (props) => {
                             >
                                 Iniciar sesión
                         </Button>
-                    </form>
+                        </form>
                     </div>
                 </CardContent>
             </Card>

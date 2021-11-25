@@ -9,7 +9,7 @@ import TbvwServices from './tbvwServices';
 import DataCustumer from './DataCustumer';
 import DataProduct from './DataProduct';
 import DataVendors from './DataVendors';
-
+import Button from '@material-ui/core/Button';
 
 const ContainerView = styled.main`
   display: flex;
@@ -76,10 +76,6 @@ const ContainerView = styled.main`
     .TotalInput {
       border: none;
       text-align: end;
-      &::before {
-        content: "$";
-
-      }
     }
   }
   .titleVendor {
@@ -101,8 +97,8 @@ const ViewNotes = () => {
     saveClic,
     stateLocal,
     inventary,
-    arrayVendors,
     arrayServices,
+    onSaveData,
     validGeneralLocal,
   } = useNotesAction();
 
@@ -230,18 +226,22 @@ const ViewNotes = () => {
         <label
           className="TotalInput"
         >
-          {stateLocal.total.toFixed(2)}
+          {"$" + stateLocal.total.toFixed(2)}
         </label>
       </div>
+
       {/*datos de refacciones*/}
       <DataProduct />
       {/*datos del servcio*/}
       <TbvwServices />
       {/*datos del provedor*/}
       <DataVendors />
-      {/*Total a pagar*/}
+      {
+        (stateLocal.name) && (<Button variant="contained" color="primary" onClick={onSaveData}>
+          Guardar Nota
+        </Button>)
+      }
 
-      <hr />
     </ContainerView>
   )
 }

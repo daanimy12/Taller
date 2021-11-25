@@ -64,7 +64,7 @@ const VwServices = () => {
         if (services.Nombre !== '' && services.Precio > 0) {
             return (
                 <Button
-                    variant="contained"
+                    variant="outlined"
                     color="primary"
                     type="submit"
                     onClick={handleSubmit}
@@ -75,7 +75,7 @@ const VwServices = () => {
 
     return (
         <form className={classes.root} onSubmit={handleSubmit}>
-            <h3> Servicio</h3>
+            <h5> Servicio </h5>
             <TextField
                 hiddenLabel
                 name="Nombre"
