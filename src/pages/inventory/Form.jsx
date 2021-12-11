@@ -3,18 +3,16 @@ import styled from "styled-components";
 import { NotificationManager } from "react-notifications";
 import { makeStyles } from '@material-ui/core/styles';
 
-  const inicialValuesF = {
-    Key: '',
-    folio: '',
-    barcode: '',
-    names: '',
-    amount: 0,
-    price: 0,
-    description: '',
-    photo: null,
-    img: null,
-    Type: 'herramienta',
-  }
+const inicialValuesF = {
+  folio: '',
+  barcode: '',
+  names: '',
+  amount: 0,
+  price: 0,
+  description: '',
+  img: null,
+  Type: 'herramienta',
+}
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(5),
@@ -40,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const Form = (props) => {
   const classes = useStyles();
-  const { inventoryEdit, addOrEdit, onRemove } = props;
+  const { stateEdit, addOrEdit, onRemove, progress } = props;
   const [state, setState] = useState(inicialValuesF);
 
   const onChangeInput = ({ target }) => {
@@ -53,60 +51,41 @@ const Form = (props) => {
   };
 
   const resetForm = () => {
-    setState({ ...inicialValuesF });
-  };
-
-  const onCancel = () => {
-    resetForm();
+    setState(prevState => ({
+      ...inicialValuesF
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addOrEdit(state, resetForm);
+    try {
+      addOrEdit(state, resetForm)
+    } catch (error) {
+      console.error('error', error)
+    }
   };
 
   const imageHandler = (e) => {
-    const reader = new FileReader();
-    const photo = e.target.files[0];
-    try {
-      reader.onload = () => {
-        if (reader.readyState === 2) {
-          setState(prev => ({
-            ...prev,
-            // photoP: reader.result, view Img preload.
-            photo,
-          }));
-        }
-      };
-      reader.readAsDataURL(e.target.files[0])
-    } catch (error) {
-      NotificationManager.error('Ocurrió un error: Faltan datos');
+    const img = e.target.files[0];
+    if (img) {
+      setState(prev => ({
+        ...prev,
+        img,
+      }));
     }
   };
 
   useEffect(() => {
-    if (inventoryEdit != null) {
-      const { Key, folio, barcode, names, amount, price, description, Type, img } = inventoryEdit;
-      let payload = {
-        Key,
-        folio,
-        barcode,
-        names,
-        amount,
-        price,
-        description,
-        Type,
-        img,
-      };
-
-      if (folio != null && barcode != null && names != null && amount != null && price != null && description != null && Type != null && img != null && Key != null) {
-        setState({
-          ...payload,
-        });
-      }
+    setState(prevState => ({
+      ...prevState,
+      ...stateEdit
+    }));
+    console.log('montando')
+    return () => {
+      console.log('Limpiando ')
     }
-  }, [inventoryEdit])
-  
+  }, [stateEdit])
+
 
   return (
     <form className="boxMain" onSubmit={handleSubmit}>
@@ -168,7 +147,7 @@ const Form = (props) => {
           name="description"
           value={state.description}
           onChange={onChangeInput}
-          required
+        // required
         />
       </div>
       <div className="typeUser" >
@@ -198,35 +177,39 @@ const Form = (props) => {
       <div className="boxInput" >
         <label> Imagen: </label>
         <input
-          name="photo"
+          name="img"
           onChange={imageHandler}
           accept="image/*"
-          id="icon-button-file"
           type="file"
-          required
         />
       </div>
-      <div className="boxAction">
-        <button
-          type="submit"
-          className="save"
-        >
-          Aceptar
-        </button>
-        <button
-          type="button"
-          onClick={(e) => onRemove(state.Key, onCancel)}
-          className="delete"
-        >
-          Eliminar
-        </button>
-        <button
-          type="button"
-          onClick={onCancel}
-          className="cancel">
-          Cancelar
-        </button>
-      </div>
+      {!progress && (<div className="boxAction">
+        <label>cargando</label>
+        <progress style={{ width: 150, height: 18 }} placeholder="enviando datos..." value={100} />
+      </div>)}
+      {progress && (
+        <div className="boxAction">
+          <button
+            type="submit"
+            className="save"
+          >
+            Aceptar
+          </button>
+          <button
+            type="button"
+            onClick={() => onRemove(state.Key, resetForm)}
+            className="delete"
+          >
+            Eliminar
+          </button>
+          <button
+            type="button"
+            onClick={resetForm}
+            className="cancel">
+            Cancelar
+          </button>
+        </div>
+      )}
     </form>
   )
 };

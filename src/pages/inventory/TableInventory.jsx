@@ -4,8 +4,27 @@ import Barcode from 'react-barcode';
 
 const TableInventory = (props) => {
     const { className, values, editInventory, onChangeInput, filtro } = props;
+    const [query, setQuery] = useState("");
+
+    const handleChange = (e) => {
+        let newQuery = e.target.value;
+        setQuery(prev => (
+            newQuery
+        ))
+    }
+
+    const search = (rows) => {
+        const columns = rows[0] && Object.keys(rows[0]);
+        return rows.filter((row) =>
+            columns.some(
+                (column) =>
+                    row[column].toString().toLowerCase().indexOf(query.toLowerCase()) > -1
+            )
+        );
+    }
     return (
         <div className={className} >
+            <input type="search" placeholder="Buscar" value={query} onChange={handleChange} />
             <div className="typeUser" >
                 <div>
                     <input
@@ -45,7 +64,7 @@ const TableInventory = (props) => {
                 <tbody>
                     {
                         values.length != 0 ?
-                            values.map(
+                            search(values)?.map(
                             (val, idx) => (
                                 <tr onClick={(e) => editInventory(val)} key={idx}>
                                     <td>
@@ -77,7 +96,7 @@ const TableInventory = (props) => {
                             ) :
                             <tr key={1} >
                                 <td>
-                                    -Vacio-
+                                    empty
                                 </td>
                             </tr>
                     }

@@ -12,11 +12,11 @@ import { firebaseDatabase } from '../../system/model/firebase/firebase';
 const Inventory = (props) => {
   const { className } = props;
   const [state, setState] = useState([]);
-  const [stateEdit, setStateEdit] = useState([]);
+  const [stateEdit, setStateEdit] = useState({});
   const [filtro, setFiltro] = useState({
     Type: 'herramienta'
   });
-
+  const [progress, setProgress] = useState(true)
 
   const onChangeInput = ({ target }) => {
     const { name, value } = target;
@@ -41,79 +41,115 @@ const Inventory = (props) => {
 
   }
 
-  const onFileChange = async (file) => {
-    try {
-      const response = await Universal.PushImagen("/test", file);
-      return response;
-    } catch (error) {
-      console.log(error)
-      return false;
-    }
+  function todoCake({ Type, amount, barcode, description, folio, img, names, price }) {
+    return { Type, amount, barcode, description, folio, img, names, price }
   }
-  //successfully added.. data
-  const addOrEdit = async (values, resetForm) => {
-    try {
-      const copyArr = { ...values };
-      const photo = copyArr.photo;
-      const {
-        amount,
-        price,
-        description,
-        folio,
-        barcode,
-        names,
-        Type,
-        img,
-      } = copyArr;
 
-      const payload = {
-        amount,
-        price,
-        description,
-        folio,
-        barcode,
-        names,
-        Type,
-        img,
-      };
-      const getUrlPhoto = await onFileChange(photo);
-      if (getUrlPhoto != false) {
-        const url = getUrlPhoto[0];
-        payload.img = url.toString();
-        const newArr = { ...payload };
-        await Universal.PushUniversal("Inventario", newArr)
-        NotificationManager.success("Herramienta o Refacción agregado");
+
+  async function updateURLWithData(values, resetForm) {
+    let payload = ('object' == typeof values) && todoCake(values);
+    try {
+      await Universal.PushImagen("/SAImagenes", payload.img).then((url) => {
+        let downloadURL = url[0].toString()
+        let newPayload = {
+          ...payload, img: downloadURL
+        }
+        // data with new downloadURL updated
+        Universal.UpdateUniversal(`Inventario/${values.Key}`, newPayload)
+        NotificationManager.success('success :)');
+        getInvetory();
         resetForm();
-        await getInvetory();
-      }
-
+        setProgress(true);
+        setStateEdit({})
+      });
     } catch (error) {
-      console.log('error: ', error);
-      NotificationManager.error('Ocurrió un error: Faltan datos');
+      console.log('error update', error)
+      NotificationManager.success('error :(');
     }
-
   }
-
+  //successfully updated
+  const updateData = async (values, resetForm) => {
+    try {
+      let payload = ('object' == typeof values) && todoCake(values);
+      if (payload.img.name) {
+        updateURLWithData(values, resetForm);
+      } else {
+        await Universal.UpdateUniversal(`Inventario/${values.Key}`, payload);
+        NotificationManager.success('success :)');
+        getInvetory();
+        resetForm();
+        setProgress(true);
+        setStateEdit({})
+      }
+    } catch (error) {
+      console.log('error update', error)
+      setStateEdit({});
+      setProgress(true)
+      NotificationManager.error('error :(');
+      return error
+    }
+  }
+  //successfully created
+  const createNewData = async (values, resetForm) => {
+    try {
+      // upload Image
+      await Universal.PushImagen("/SAImagenes", values.img).then((url) => {
+        let downloadURL = url[0].toString()
+        const payload = {
+          ...values, img: downloadURL
+        }
+        // create data with downloadURL
+        Universal.PushUniversal("Inventario", payload);
+        getInvetory();
+        setStateEdit({})
+        resetForm();
+        setProgress(true)
+        NotificationManager.success('success');
+      });
+    } catch (error) {
+      console.log('errror create')
+      setProgress(true);
+      resetForm();
+      setStateEdit({})
+      NotificationManager.error('error :(');
+      return error
+    }
+  }
+  const addOrEdit = (values, resetForm) => {
+    setProgress(false)
+    if (values.Key) {
+      updateData(values, resetForm);
+    } else {
+      createNewData(values, resetForm);
+    }
+  }
   const editInventory = (item) => {
     setStateEdit(item)
   }
 
-  const onRemove = async (id, onCancel) => {
-    try {
-      let handleRemove = window.confirm("¿seguro que desea eliminar este elemento?")
-      if (handleRemove) {
-        const itemRef = firebaseDatabase.ref('Inventario').child(id);
-        await itemRef.remove();
-        await getInvetory();
-        NotificationManager.success("Elemento eliminado");
-        onCancel();
+  const onRemove = async (id, resetForm) => {
+    if (id) {
+      let isRemove = window.confirm(`Eliminar ${id}`)
+      if (isRemove) {
+        try {
+          let snapShot = firebaseDatabase.ref('Inventario/').child(id);
+          snapShot.remove();
+          getInvetory();
+          setStateEdit({})
+          NotificationManager.success("success");
+          resetForm();
+        } catch (error) {
+          console.log('error remove', error)
+          setStateEdit({})
+          resetForm();
+          NotificationManager.error("error :(");
+          return error;
+        };
       }
-    } catch (error) {
-      onCancel();
-      console.log('error: ', error);
-      NotificationManager.error("ocurrio un error consulte al administrador");
+    } else {
+      NotificationManager.error("seleccione un registro primero");
     }
-    onCancel();
+
   }
 
   useEffect(() => {
@@ -126,7 +162,7 @@ const Inventory = (props) => {
         <header> Agregar Herramienta / Refacción </header>
         <section>
           <article>
-            <Form addOrEdit={addOrEdit} inventoryEdit={stateEdit} onRemove={onRemove} />
+            <Form addOrEdit={addOrEdit} stateEdit={stateEdit} onRemove={onRemove} progress={progress} />
           </article>
           <article>
             <div className="boxMain">
